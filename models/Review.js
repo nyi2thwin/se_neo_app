@@ -1,6 +1,13 @@
-class UserAccount {
-  constructor(name, email) {
-    this.name = name;
-    this.email = email;
-  }
-}
+'use strict';
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var ReviewSchema =new Schema({
+  clinicId: Number,
+  userId: Number,
+  content: String,
+  rating: Number,
+  datetime: Date
+});
+
+module.exports("Review", ReviewSchema);
