@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var UserSchema = new Schema({
 	userId: {
 		type:String,
-		required: 'Kindly enter userID'
+		required: 'Kindly enter NRIC'
 	},
 	email: {
 		type:String,
@@ -15,12 +15,8 @@ var UserSchema = new Schema({
 		type:String,
 		required: 'Kindly enter user name'
 	},
-	nric: {
-		type:String,
-		required: 'Kindly enter NRIC'
-	},
 	contact: {
-		type:String,
+		type:Number,
 		required: 'Kindly enter contact no.'
 	},
 	dob: {
