@@ -3,11 +3,11 @@ var mongoose = require('mongoose'),
 	User = mongoose.model('User');
 
 
-exports.readUserByEmail = function(req,res){
-	User.findById(req.params.email, function(err,user) {
+exports.findUserById = function(req,res){
+	User.findOne({userId:req.body.userId}, function(err,user) {
 		if(err)
 			res.send(err);
-		res.jason(user)
+		res.json(user);
 	});
 };
 
