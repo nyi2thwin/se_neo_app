@@ -1,19 +1,21 @@
-var express = require('express');
-var router = express.Router();
+'use strict';
+var mongoose = require('mongoose'),
+	Booking = mongoose.model('Booking');
 
 
-//get request
-router.get('/', function(req, res){
-  var template_data = {title : 'Neo Booking | booking'}
-  res.send(template_data);
-});
+exports.findBookingByClinicId = function(req,res){
+	Booking.find({clinicId:req.body.clinicId}, function(err,booking) {
+		if(err)
+			res.send(err);
+		res.json(booking);
+	});
+};
 
-//post request
-router.post('/', function(req, res){
-  var template_data = {title : 'Neo Booking | booking'}
-  res.send(template_data);
-});
-
-
-
-module.exports = router;
+exports.createNewBooking = function(req,res){
+	var new_booking = new Booking(req.body);
+	new_booking.save(function(err,booking) {
+		if(err)
+			res.send(err);
+		res.json(booking);
+	});
+};
