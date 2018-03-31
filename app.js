@@ -12,11 +12,12 @@ var mongoose = require('mongoose');
 var hbs = require('hbs').create();
 var app = express();
 var User = require('./models/User');
+var Clinic = require('./models/Clinic');
 var bodyParser = require('body-parser');
 
 //mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/neobooking');
+mongoose.connect('mongodb://localhost:27017/neobooking');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -40,14 +41,10 @@ app.locals.father = 'NA';
 var routes = require('./route/route'); //importing route
 routes(app); //register the route
 
-//register account controller
-app.use('/account/', require('./controllers/AccountController'));
+var clinic_routes = require('./route/clinic_route'); //importing route
+clinic_routes(app); //register the route
 
-//register account controller
-app.use('/clinic/', require('./controllers/ClinicController'));
 
-//register account controller
-app.use('/booking/', require('./controllers/BookingController'));
 
 //register view 
 app.use('/', require('./views/userView'));

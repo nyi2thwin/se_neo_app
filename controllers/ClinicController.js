@@ -1,19 +1,32 @@
-var express = require('express');
-var router = express.Router();
+'use strict';
+var mongoose = require('mongoose'),
+	Clinic = mongoose.model('Clinic');
 
 
-//get request
-router.get('/', function(req, res){
-  var template_data = {title : 'Neo Booking | Clinic'}
-  res.send(template_data);
-});
+exports.findClinicById = function(req,res){
+	Clinic.findOne({userId:req.body.clinicId}, function(err,user) {
+		if(err)
+			res.send(err);
+		res.json(user);
+	});
+};
 
-//post request
-router.post('/', function(req, res){
-  var template_data = {title : 'Neo Booking | Clinic'}
-  res.send(template_data);
-});
+exports.registerNewClinic = function(req,res){
+	var new_clinic = new Clinic(req.body);
+	new_clinic.save(function(err,user) {
+		if(err)
+			res.send(err);
+		res.json(user);
+	});
+};
+
+exports.list_all_clinics = function(req, res) {
+  Clinic.find({}, function(err, Clinic) {
+    if (err)
+      res.send(err);
+    res.json(Clinic);
+  });
+};
 
 
 
-module.exports = router;
