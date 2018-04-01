@@ -7,4 +7,7 @@ module.exports = function(app){
 	
 	app.route('/findClinicById')
 	.post(clinicController.findClinicById);
+
+	app.route('/registerClinic')
+	.post(clinicController.registerNewClinic);
 };
