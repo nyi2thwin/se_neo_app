@@ -2,28 +2,61 @@
 <html ng-app="app">
 <head>
     <meta charset="utf-8" />
-    <title>AngularJS User Registration and Login Example</title>
+    <title>Neo Booking </title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
-    <link href="app-content/app.css" rel="stylesheet" />
+	<link href="app-content/app.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="jumbotron">
-        <div class="container">
-            <div class="col-sm-8 col-sm-offset-2">
-                <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
-                <div ng-view></div>
-            </div>
-        </div>
-    </div>
-    <div class="credits text-center">
-        <p>
-            <a href="http://jasonwatmore.com/post/2015/03/10/angularjs-user-registration-and-login-example-tutorial">AngularJS User Registration and Login Example</a>
-        </p>
-        <p>
-            <a href="http://jasonwatmore.com">JasonWatmore.com</a>
-        </p>
-    </div>
+	<div class="wrapper">
+		<!-- Sidebar Holder -->
+		<nav id="sidebar">
+			<div class="sidebar-header">
+				<h3 style = "padding: 10px;">{{userName}}</h3>
+			</div>
+			<ul class="list-unstyled components" ng-hide="isClinic">
+				<li>
+					<a href="#!/login">Login</a>
+				</li>
+				<li>
+					<a href="#!/register">Register</a>
+				</li>
+			
+			</ul>
+			<ul class="list-unstyled components" ng-show="isClinic">
+				<li>
+					<a href="#!/">View My Clinic</a>
+				</li>
+				<li>
+					<a href="#!/home">List Clinic</a>
+				</li>
+			</ul>
 
+		</nav>
+
+		<!-- Page Content Holder -->
+		<div id="content">
+
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+					<div class="col-sm-8 col-sm-offset-2">
+						<div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+						
+					</div>
+					<div class="navbar-header">
+						<button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+							<i class="glyphicon glyphicon-align-left"></i>
+							<span>Toggle Sidebar</span>
+						</button>
+					</div>
+
+				</div>
+			</nav>
+			<div ng-view></div>
+			<!--<div id="map"></div> -->
+		</div>
+	</div>
+
+	<!-- Scripts -->
     <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="//code.angularjs.org/1.6.0/angular.min.js"></script>
     <script src="//code.angularjs.org/1.6.0/angular-route.min.js"></script>
@@ -39,7 +72,7 @@
     <!-- Fake user service for demo that uses local storage -->
     <script src="app-services/user.service.local-storage.js"></script>
 
-    <script src="home/home.controller.js"></script>
+    <script src="clinic/home.controller.js"></script>
     <script src="login/login.controller.js"></script>
     <script src="register/register.controller.js"></script>
 </body>

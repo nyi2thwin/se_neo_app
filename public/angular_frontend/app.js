@@ -11,7 +11,7 @@
         $routeProvider
             .when('/', {
                 controller: 'HomeController',
-                templateUrl: 'home/home.view.html',
+                templateUrl: 'clinic/patientList.html',
                 controllerAs: 'vm'
             })
 
@@ -34,11 +34,25 @@
     function run($rootScope, $location, $cookies, $http) {
         // keep user logged in after page refresh
         $rootScope.globals = $cookies.getObject('globals') || {};
+		$rootScope.isClinic = false;
+		$rootScope.login = false;
         if ($rootScope.globals.currentUser) {
             $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
         }
+		
+		var init = function(){
+                 $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar, #content').toggleClass('active');
+                    $('.collapse.in').toggleClass('in');
+                    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                });
+				
+				
+		};
+		
+		init();
 
-        $rootScope.$on('$locationChangeStart', function (event, next, current) {
+       $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in and trying to access a restricted page
             var restrictedPage = $.inArray($location.path(), ['/login', '/register']) === -1;
             var loggedIn = $rootScope.globals.currentUser;
@@ -46,6 +60,7 @@
                 $location.path('/login');
             }
         });
+
     }
 
 })();

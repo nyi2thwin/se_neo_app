@@ -1,14 +1,19 @@
-(function () {
+﻿(function () {
     'use strict';
 
     angular
         .module('app')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$location', '$http', 'FlashService'];
-    function LoginController($location, $http, FlashService) {
+    LoginController.$inject = ['$location', '$http', 'FlashService','$rootScope','AuthenticationService'];
+    function LoginController($location, $http, FlashService,$rootScope,AuthenticationService) {
+		
+
         var vm = this;
 		var loginURL = "http://localhost:3000/findUserById";
+		$rootScope.userId = vm.username; 
+		
+		$rootScope.clinicId = '02';  //for testing purpose
         vm.login = login;
 
        /* (function initController() {
@@ -23,7 +28,10 @@
             function(response){
                 if (response.statusText == "OK") {
 						if(response.data.password == vm.password){
+							AuthenticationService.SetCredentials(vm.username, vm.password);
 							$location.path('/');
+							$rootScope.isClinic = true;
+							$rootScope.login = true;
 						}
 						else{
 							FlashService.Error("Invalid Password");
