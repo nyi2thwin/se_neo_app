@@ -3,18 +3,27 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var BookingSchema = new Schema({
-  clinicId: Number,
-  dateTime: Date,
-  userId: Number,
-  queNo: Number,
-  status: String,
-  estimatedTime: Date
+	clinicId: {
+		type:String,
+		required: 'Kindly enter ClinicId'
+	},
+	userId: {
+		type:String,
+		required: 'Kindly enter NRIC'
+	},
+
+	dateTime: {
+		type:Date
+	},
+	queNo: {
+		type:Number
+	},
+	stauts: {
+		type:String
+	},
+	estimatedTime: {
+		type:Number
+	}
 });
 
-BookingSchema.save(function(err){
-  if(err) throw err;
-
-  console.log("Booking is saved.");
-});
-
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('Booking', BookingSchema);

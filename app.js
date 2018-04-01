@@ -13,6 +13,7 @@ var hbs = require('hbs').create();
 var app = express();
 var User = require('./models/User');
 var Clinic = require('./models/Clinic');
+var Booking = require('./models/Booking');
 var bodyParser = require('body-parser');
 
 //mongoose instance connection url connection
