@@ -14,7 +14,7 @@
                 templateUrl: 'clinic/patientList.html',
                 controllerAs: 'vm'
             })
-	    .when('/viewClinic', {
+			.when('/viewClinic', {
                 controller: 'viewClinicController',
                 templateUrl: 'clinic/viewClinic.html',
                 controllerAs: 'vm'
