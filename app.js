@@ -15,6 +15,18 @@ var User = require('./models/User');
 var Clinic = require('./models/Clinic');
 var Booking = require('./models/Booking');
 var bodyParser = require('body-parser');
+var NodeGeocoder = require('node-geocoder');
+
+var options = {
+  provider: 'google',
+ 
+  // Optional depending on the providers
+  httpAdapter: 'https', // Default
+  apiKey: 'AIzaSyD2Nza2P2FZmM0ZY7lRf1-kYX_h-ONgPuI', // for Mapquest, OpenCage, Google Premier
+  formatter: null         // 'gpx', 'string', ...
+};
+ 
+geocoder = NodeGeocoder(options);
 
 //mongoose instance connection url connection
 mongoose.Promise = global.Promise;

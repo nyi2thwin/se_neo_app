@@ -6,8 +6,7 @@ var ClinicSchema = new Schema({
 	name: String,
 	address: String,
 	postalCode: Number,
-	lat: Number,
-	long: Number,
+	location:[Number],
 	doctors: [String],
 	startTime: String, //10:00
 	endTime: String // 18:00
