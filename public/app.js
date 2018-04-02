@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
     'use strict';
 
     angular
@@ -14,11 +14,7 @@
                 templateUrl: 'clinic/patientList.html',
                 controllerAs: 'vm'
             })
-			.when('/viewClinic', {
-                controller: 'viewClinicController',
-                templateUrl: 'clinic/viewClinic.html',
-                controllerAs: 'vm'
-            })
+
             .when('/login', {
                 controller: 'LoginController',
                 templateUrl: 'login/login.view.html',
