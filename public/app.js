@@ -39,8 +39,7 @@
         // keep user logged in after page refresh
         $rootScope.globals = $cookies.getObject('globals') || {};
 		$rootScope.isClinic = false;
-		$rootScope.login = false;
-        if ($rootScope.globals.currentUser) {
+		if ($rootScope.globals.currentUser) {
             $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
         }
 		
