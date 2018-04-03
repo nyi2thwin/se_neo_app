@@ -54,6 +54,13 @@
 				
 		};
 		
+		$rootScope.logout = function(){
+			$rootScope.globals = {};
+            $cookies.remove('globals');
+            $http.defaults.headers.common.Authorization = 'Basic';
+			$rootScope.isClinic = false;
+			$location.path('/login');
+		}
 		init();
 
        $rootScope.$on('$locationChangeStart', function (event, next, current) {
@@ -63,6 +70,10 @@
 		    if (restrictedPage && !loggedIn) {
                 $location.path('/login');
 				$rootScope.isClinic = false;
+            }
+			else if (!restrictedPage && loggedIn) {
+                $location.path('/listPatient');
+				$rootScope.isClinic = true;
             }
 			
         });

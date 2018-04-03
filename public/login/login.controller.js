@@ -16,11 +16,11 @@
 		$rootScope.clinicId = '02';  //for testing purpose
         vm.login = login;
 
-        (function initController() {
+        /*(function initController() {
             // reset login status
 			$rootScope.isClinic = false;
             AuthenticationService.ClearCredentials();
-        })();
+        })();*/
 		
         function login() {
             vm.dataLoading = true;
