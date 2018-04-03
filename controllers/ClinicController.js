@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
 
 
 exports.findClinicById = function(req,res){
-	Clinic.findOne({userId:req.body.clinicId}, function(err,user) {
+	Clinic.findOne({_id:req.body.clinicId}, function(err,user) {
 		if(err)
 			res.send(err);
 		res.json(user);
@@ -23,14 +23,14 @@ exports.registerNewClinic = function(req,res){
 exports.listAllClinics = function(req, res) {
 
   	Clinic.find({}, function(err, Clinics) {
-	if (err)
-		res.send(err);
+	 var jobQueries = [];
+		if (err)
+			res.send(err);
 
-	Clinics.forEach(function(c) {
-		c.l
-		jobQueries.push(jobSchema.find({u_sno:s.u.sno}));
-	 });
-    res.json(Clinics);
+		/*Clinics.forEach(function(c) {
+			jobQueries.push(jobSchema.find({u_sno:s.u.sno}));
+		 }); */
+		res.json(Clinics);
   });
 };
 

@@ -10,7 +10,7 @@
 		 var vm = this;
 		 var findClinicByClinicIdURL = "http://localhost:3000/findClinicById";
 		 var updateMyClinicInfoURL = "http://localhost:3000/updateClinic"; //To be update the link
-		 var clinicId = "5abedbf6f2dc26bda0fb7df4"; //hard-code for testing purpose
+		 var clinicId = "5ac1eea8060125dfe7296488"; //hard-code for testing purpose
 		 $scope.mdata = {};
 		 var dataBeforeUpdate = {};
 		 $scope.disableForm = true;
