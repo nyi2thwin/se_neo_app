@@ -16,11 +16,12 @@
 		$rootScope.clinicId = '02';  //for testing purpose
         vm.login = login;
 
-       /* (function initController() {
+        (function initController() {
             // reset login status
+			$rootScope.isClinic = false;
             AuthenticationService.ClearCredentials();
         })();
-		*/
+		
         function login() {
             vm.dataLoading = true;
 			var userId = {"userId":vm.username};
@@ -29,7 +30,7 @@
                 if (response.statusText == "OK") {
 						if(response.data.password == vm.password){
 							AuthenticationService.SetCredentials(vm.username, vm.password);
-							$location.path('/');
+							$location.path('/listPatient');
 							$rootScope.isClinic = true;
 							$rootScope.login = true;
 						}

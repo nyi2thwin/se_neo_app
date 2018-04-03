@@ -9,7 +9,7 @@
     config.$inject = ['$routeProvider', '$locationProvider'];
     function config($routeProvider, $locationProvider) {
         $routeProvider
-            .when('/', {
+            .when('/listPatient', {
                 controller: 'patientListController',
                 templateUrl: 'clinic/patientList.html',
                 controllerAs: 'vm'
@@ -60,9 +60,11 @@
             // redirect to login page if not logged in and trying to access a restricted page
             var restrictedPage = $.inArray($location.path(), ['/login', '/register']) === -1;
             var loggedIn = $rootScope.globals.currentUser;
-            if (restrictedPage && !loggedIn) {
+		    if (restrictedPage && !loggedIn) {
                 $location.path('/login');
+				$rootScope.isClinic = false;
             }
+			
         });
 
     }
