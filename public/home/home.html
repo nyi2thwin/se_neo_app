@@ -22,7 +22,7 @@
 <section class="search-box" ng-hide ="hideSearchBox">
     <div class="container-fluid">
 		<div class="row">
-			<div class="col-md-5 listing-block">
+			<div class="col-md-5 listing-block" ng-hide="hideResult">
 				<div class="media">
 					<div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i></div>
 					<div class="media-body pl-3" ng-repeat="clinic in clinicList">
@@ -33,7 +33,26 @@
 							<span><i class="fa fa-bath"></i>to</span>
 							<span><i class="fa fa-bath"></i>{{clinic.endTime}}</span>
 						</div>
-						<div class="address">{{clinic.address}}</div>
+						<div class="address">{{clinic.address}} </div>
+						<button type="submit" ng-Click="vm.viewDetail(clinic);" class="btn btn-primary">View Detail</button>
+					</div>
+				</div>
+		   
+			</div>
+			<div class="col-md-5 listing-block" ng-hide="!hideResult">
+				<div class="media">
+					<button type="submit" ng-click="vm.backToResult()" class="btn btn-primary">Back to Result</button>
+					<div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i></div>
+					<div class="media-body pl-3">
+						<div class="name"><small>{{mdata.clinic.name}}</small></div>
+						<div class="stats">
+							<span><i class="fa fa-arrows-alt"></i>Operating Hr:</span>
+							<span><i class="fa fa-bath"></i>{{mdata.clinic.startTime}}</span>
+							<span><i class="fa fa-bath"></i>to</span>
+							<span><i class="fa fa-bath"></i>{{mdata.clinic.endTime}}</span>
+						</div>
+						<div class="address">{{mdata.clinic.address}}</div>
+						<button type="submit" ng-Click="vm.makeAppoint();" class="btn btn-primary">Make Appointment</button>
 					</div>
 				</div>
 		   
