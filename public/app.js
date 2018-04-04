@@ -24,16 +24,29 @@
                 templateUrl: 'login/login.view.html',
                 controllerAs: 'vm'
             })
-
-            .when('/register', {
+			.when('/register', {
                 controller: 'RegisterController',
                 templateUrl: 'register/register.view.html',
                 controllerAs: 'vm'
             })
-			
 			.when('/home', {
                 controller: 'homeController',
                 templateUrl: 'home/home.html',
+                controllerAs: 'vm'
+            })
+			.when('/home', {
+                controller: 'homeController',
+                templateUrl: 'home/home.html',
+                controllerAs: 'vm'
+            })
+			.when('/viewMyInfo', {
+                controller: 'viewMyInfoController',
+                templateUrl: 'member/viewMyInfo.html',
+                controllerAs: 'vm'
+            })
+			.when('/viewHistory', {
+                controller: 'viewAppointmentHistoryController',
+                templateUrl: 'member/viewAppointmentHistory.html',
                 controllerAs: 'vm'
             })
 
@@ -95,6 +108,7 @@
 			if ($rootScope.globals.currentUser.username == "S1234567E"){
 				$location.path('/listPatient');
 				$rootScope.isClinic = true;
+				
 			}
 			else{
 				$location.path('/home');

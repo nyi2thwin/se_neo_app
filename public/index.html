@@ -13,15 +13,6 @@
 			<div class="sidebar-header">
 				<h3 style = "padding: 10px;">{{userName}}</h3>
 			</div>
-			<ul class="list-unstyled components" ng-show="isClinic">
-				<li>
-					<a href="#!/listPatient">Patients in Queue</a>
-				</li>
-				<li>
-					<a href="#!/viewClinic">My Clinic Info</a>
-				</li>
-			
-			</ul>
 			<ul class="list-unstyled components" ng-show="isGuest">
 				<li>
 					<a href="#!/login">Login</a>
@@ -31,6 +22,21 @@
 				</li>
 			</ul>
 			<ul class="list-unstyled components" ng-show="loggedIn">
+				<li ng-show="isClinic">
+					<a href="#!/listPatient">Patients in Queue</a>
+				</li>
+				<li ng-show="isClinic">
+					<a href="#!/viewClinic">My Clinic Info</a>
+				</li>
+				<li ng-show="!isClinic">
+					<a href="#!/home">Search Nearby Clinic</a>
+				</li>
+				<li ng-show="!isGuest && !isClinic">
+					<a href="#!/viewMyInfo">My Account Info</a>
+				</li>
+				<li ng-show="!isGuest && !isClinic">
+					<a href="#!/viewHistory">Appointment History</a>
+				</li>
 				<button type="submit" ng-click="logout();" class="btn btn-primary">Logout</button>
 			</ul>
 		</nav>
@@ -79,5 +85,7 @@
     <script src="login/login.controller.js"></script>
     <script src="register/register.controller.js"></script>
 	<script src="home/homeController.js"></script>
+	<script src="member/viewMyInfoController.js"></script>
+	<script src="member/viewAppointmentHistoryController.js"></script>
 </body>
 </html>

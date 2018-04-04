@@ -12,7 +12,8 @@
         var vm = this;
 		var loginURL = "http://localhost:3000/findUserById";
 		$rootScope.userId = vm.username; 
-		$rootScope.clinicId = '02';  //for testing purpose
+		$rootScope.isClinic = false;
+		$rootScope.isGuest = false;
         vm.login = login;
 
         /*(function initController() {
@@ -60,6 +61,7 @@
 			if (vm.username == "S1234567E"){
 				$location.path('/listPatient');
 				$rootScope.isClinic = true;
+				$rootScope.clinicId = "5ac1eea8060125dfe7296488"; //hard-code for testing purpose
 			}
 			else{
 				$location.path('/home');
