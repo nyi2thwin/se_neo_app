@@ -53,7 +53,7 @@ a, a:hover, a:focus {
     SIDEBAR STYLE
 ----------------------------------------------------- */
 #sidebar {
-    width: 30%;
+    width: 20%;
     position: fixed;
     top: 0;
     left: 0;
@@ -147,7 +147,7 @@ a.article, a.article:hover {
     CONTENT STYLE
 ----------------------------------------------------- */
 #content {
-    width: 70%;
+    width: 80%;
 	height: 100%;
     padding: 40px;
 	transition: all 0.3s;
@@ -186,4 +186,19 @@ a.article, a.article:hover {
     }
 }
 
+/*Home Page Media */
+.search-box{width:95%; margin:0 auto 40px; box-shadow:20px 20px 0 rgba(0,0,0,0.2);}
+.listing-block{background:#fff; height:500px; padding-top:20px; overflow-y:scroll;}
+.media {background:#fff; position:relative; margin-bottom:15px;}
+.media img{width:200px;margin:0; height:136px;}
+.media-body{border:1px solid #bcbcbc; border-left:0; height:136px;}
+.media .name{float:left; width:100%; font-size:30px;font-weight:600; color:#4765AB;}
+.media .name small{display:block; font-size:17px; color:#232323;}
+.media .stats{float:left; width:100%; margin-top:10px;}
+.media .stats span{float:left; margin-right:10px; font-size:15px;}
+.media .stats span i{margin-right:7px; color:#4765AB;}
+.media .address{float:left; width:100%;font-size:14px; margin-top:5px; color:#888;}
+.media .fav-box{position:absolute; right:10px; font-size:20px; top:4px; color:#E74C3C;}
+
+.map-box{background-color:#A3CCFF;}
 

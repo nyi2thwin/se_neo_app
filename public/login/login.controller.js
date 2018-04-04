@@ -12,7 +12,6 @@
         var vm = this;
 		var loginURL = "http://localhost:3000/findUserById";
 		$rootScope.userId = vm.username; 
-		
 		$rootScope.clinicId = '02';  //for testing purpose
         vm.login = login;
 
@@ -30,11 +29,11 @@
                 if (response.statusText == "OK") {
 						if(response.data.password == vm.password){
 							AuthenticationService.SetCredentials(vm.username, vm.password);
-							$location.path('/listPatient');
-							$rootScope.isClinic = true;
-							$rootScope.login = true;
+							$rootScope.loggedIn = true;
+							isClinicAdmin();
 						}
 						else{
+							$rootScope.loggedIn = false;
 							FlashService.Error("Invalid Password");
 							vm.dataLoading = false;
 						}
@@ -55,6 +54,16 @@
                 }
             }); */
         };
+		
+		var isClinicAdmin = function(){
+			if (vm.username == "S1234567E"){
+				$location.path('/listPatient');
+				$rootScope.isClinic = true;
+			}
+			else{
+				$location.path('/home');
+			}
+		}
     }
 
 })();

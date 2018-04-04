@@ -30,6 +30,12 @@
                 templateUrl: 'register/register.view.html',
                 controllerAs: 'vm'
             })
+			
+			.when('/home', {
+                controller: 'homeController',
+                templateUrl: 'home/home.html',
+                controllerAs: 'vm'
+            })
 
             .otherwise({ redirectTo: '/login' });
     }
@@ -39,7 +45,10 @@
         // keep user logged in after page refresh
         $rootScope.globals = $cookies.getObject('globals') || {};
 		$rootScope.isClinic = false;
+		$rootScope.isGuest = false;
+		$rootScope.loggedIn = false;
 		if ($rootScope.globals.currentUser) {
+			$rootScope.loggedIn = true;
             $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
         }
 		
@@ -55,27 +64,42 @@
 		
 		$rootScope.logout = function(){
 			$rootScope.globals = {};
+			$rootScope.userName = "";
             $cookies.remove('globals');
             $http.defaults.headers.common.Authorization = 'Basic';
 			$rootScope.isClinic = false;
+			$rootScope.isGuest = false;
+			$rootScope.loggedIn = false;
 			$location.path('/login');
 		}
 		init();
 
        $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in and trying to access a restricted page
-            var restrictedPage = $.inArray($location.path(), ['/login', '/register']) === -1;
+            var restrictedPage = $.inArray($location.path(), ['/login', '/register','/home']) === -1;
             var loggedIn = $rootScope.globals.currentUser;
+			
 		    if (restrictedPage && !loggedIn) {
                 $location.path('/login');
 				$rootScope.isClinic = false;
+				$rootScope.isGuest = false;
             }
 			else if (!restrictedPage && loggedIn) {
-                $location.path('/listPatient');
-				$rootScope.isClinic = true;
-            }
-			
+				$rootScope.loggedIn = true;
+				isClinicAdmin();
+	        }
+						
         });
+		
+		var isClinicAdmin = function(){
+			if ($rootScope.globals.currentUser.username == "S1234567E"){
+				$location.path('/listPatient');
+				$rootScope.isClinic = true;
+			}
+			else{
+				$location.path('/home');
+			}
+		}
 
     }
 

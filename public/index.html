@@ -13,15 +13,6 @@
 			<div class="sidebar-header">
 				<h3 style = "padding: 10px;">{{userName}}</h3>
 			</div>
-			<ul class="list-unstyled components" ng-hide="isClinic">
-				<li>
-					<a href="#!/login">Login</a>
-				</li>
-				<li>
-					<a href="#!/register">Register</a>
-				</li>
-			
-			</ul>
 			<ul class="list-unstyled components" ng-show="isClinic">
 				<li>
 					<a href="#!/listPatient">View Patients in Queue</a>
@@ -29,17 +20,25 @@
 				<li>
 					<a href="#!/viewClinic">View My Clinic Info</a>
 				</li>
+			
+			</ul>
+			<ul class="list-unstyled components" ng-show="isGuest">
 				<li>
-					<button type="submit" ng-click="logout();" class="btn btn-primary">Logout</button>
+					<a href="#!/login">Login</a>
+				</li>
+				<li>
+					<a href="#!/register">Register</a>
 				</li>
 			</ul>
-
+			<ul class="list-unstyled components" ng-show="loggedIn">
+				<button type="submit" ng-click="logout();" class="btn btn-primary">Logout</button>
+			</ul>
 		</nav>
 
 		<!-- Page Content Holder -->
 		<div id="content">
 
-			<nav class="navbar navbar-default">
+			<nav class="navbar navbar-default" ng-show="isClinic || isGuest">
 				<div class="container-fluid">
 					<div class="col-sm-8 col-sm-offset-2">
 						<div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
@@ -55,8 +54,8 @@
 				</div>
 			</nav>
 			<div ng-view></div>
-			<!--<div id="map"></div> -->
 		</div>
+		
 	</div>
 
 	<!-- Scripts -->
@@ -79,5 +78,6 @@
 	<script src="clinic/viewClinicController.js"></script>
     <script src="login/login.controller.js"></script>
     <script src="register/register.controller.js"></script>
+	<script src="home/homeController.js"></script>
 </body>
 </html>
