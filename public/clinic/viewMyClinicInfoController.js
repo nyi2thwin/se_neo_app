@@ -3,10 +3,10 @@
 
     angular
         .module('app')
-        .controller('viewClinicController', viewClinicController);
+        .controller('viewMyClinicInfoController', viewMyClinicInfoController);
 
-    viewClinicController.$inject = ['$scope', '$http', '$filter', '$location','$rootScope'];
-    function viewClinicController($scope, $http, $filter, $location,$rootScope) {
+    viewMyClinicInfoController.$inject = ['$scope', '$http', '$filter', '$location','$rootScope'];
+    function viewMyClinicInfoController($scope, $http, $filter, $location,$rootScope) {
 		 var vm = this;
 		 var findClinicByClinicIdURL = "http://localhost:3000/findClinicById";
 		 var updateMyClinicInfoURL = "http://localhost:3000/updateClinic"; //To be update the link
