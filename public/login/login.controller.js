@@ -30,6 +30,7 @@
 						if(response.data.password == vm.password){
 							AuthenticationService.SetCredentials(vm.username, vm.password);
 							$rootScope.loggedIn = true;
+							$rootScope.userName = response.data.name;
 							isClinicAdmin();
 						}
 						else{

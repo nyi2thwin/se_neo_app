@@ -14,7 +14,6 @@
 			$rootScope.isGuest = true;
 		 }
 		 else{
-			$rootScope.userName = loggedIn.username;
 			$rootScope.isGuest = false;
 		 }
 		 var findNearByClinicURL = "http://localhost:3000/getNearByClinic/"+vm.postalCode;
