@@ -7,7 +7,7 @@
 	<form name="form" ng-submit="vm.search()" role="form" class="form-inline">
         <div class="form-group mb-2" ng-class="{ 'has-error': form.postalCode.$dirty && form.postalCode.$error.required }">
             <label for="postalCode">Postal Code</label>
-            <input type="text" name="postalCode" id="postalCode" class="form-control" ng-model="vm.postalCode" required />
+            <input type="text" name="postalCode" id="postalCode" class="form-control" ng-model="postalCode" required />
             <span ng-show="form.postalCode.$dirty && form.postalCode.$error.required" class="help-block">Please enter Postal Code</span>
        
             <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Search</button>

@@ -51,7 +51,7 @@
 		else{
 			$rootScope.isGuest = false;
 		}
-		var findNearByClinicURL = "http://localhost:3000/getNearByClinic/"+vm.postalCode;
+		var findNearByClinicURL = "http://localhost:3000/getNearByClinic/"+$scope.postalCode;
 		var findBookingByClinicIdURL = "http://localhost:3000/findBookingByClinicId";
 		var bookURL = "http://localhost:3000/book";
 		$scope.mdata ={};
@@ -60,6 +60,7 @@
 		vm.search = search;
 		function search() {
             vm.dataLoading = true;
+			var findNearByClinicURL = "http://localhost:3000/getNearByClinic/"+$scope.postalCode;
             $http.get(findNearByClinicURL).then(
             function(response){
                 if (response.statusText == "OK") {
@@ -139,7 +140,7 @@
 		}
 		
 		var mapOptions = {
-                  zoom: 10,
+                  zoom: 13,
                   center: new google.maps.LatLng(1.290270,103.851959),
                   mapTypeId: google.maps.MapTypeId.TERRAIN
         }
