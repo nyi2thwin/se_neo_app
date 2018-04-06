@@ -158,12 +158,40 @@ a.article, a.article:hover {
 #content.active {
     width: 100%;
 }
+/* -------------------------------------------------------
+	MAP STYLE
+---------------------------------------------------------*/
 
 #map {	
 		width: 100%;
         height: 100%;
 }
-
+#repeat{ 
+     display: inline;
+     }
+#country_container { 
+     width: 1000px; 
+     margin: 13px 3px 3px 0px; 
+     text-align: center; 
+     width: 85px; 
+     padding: 4px; 
+     display: inline-table;  
+     color: white; 
+     background-color: black; 
+     font-size: 12px; 
+     cursor: pointer;
+     border: 1px solid black; 
+     border-radius:13px; 
+     }
+#country_container:hover { 
+     box-shadow: 0px 0px 10px black;
+     background-color: gray; 
+     border: 1px solid gray; 
+     cursor: pointer; 
+     }
+#names { 
+     cursor: pointer; 
+       }
 
 /* ---------------------------------------------------
     MEDIAQUERIES
@@ -187,9 +215,9 @@ a.article, a.article:hover {
 }
 
 /*Home Page Media */
-.search-box{width:95%; margin:0 auto 40px; box-shadow:20px 20px 0 rgba(0,0,0,0.2);}
-.listing-block{background:#fff; height:500px; padding-top:20px; overflow-y:scroll;}
-.media {background:#fff; position:relative; margin-bottom:15px;}
+.search-box{width:95%; height:100%; margin:0 auto 40px; box-shadow:20px 20px 0 rgba(0,0,0,0.2);}
+.listing-block{background:#fff; height:100%; padding-top:20px; overflow-y:scroll;}
+.media {background:#fff; height:100%; position:relative; margin-bottom:15px;}
 .media img{width:200px;margin:0; height:136px;}
 .media-body{border:1px solid #bcbcbc; border-left:0; height:136px;}
 .media .name{float:left; width:100%; font-size:30px;font-weight:600; color:#4765AB;}

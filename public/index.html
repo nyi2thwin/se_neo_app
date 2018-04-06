@@ -60,7 +60,7 @@
 				<div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
 						
 			</div>
-			<div ng-view></div>
+			<div ng-view style="height:100%"></div>
 		</div>
 		
 	</div>
@@ -70,11 +70,11 @@
     <script src="//code.angularjs.org/1.6.0/angular.min.js"></script>
     <script src="//code.angularjs.org/1.6.0/angular-route.min.js"></script>
     <script src="//code.angularjs.org/1.6.0/angular-cookies.min.js"></script>
-
+	<script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>
     <script src="app.js"></script>
     <script src="app-services/authentication.service.js"></script>
     <script src="app-services/flash.service.js"></script>
-
+	
     <!-- Real user service that uses an api -->
     <!-- <script src="app-services/user.service.js"></script> -->
 
