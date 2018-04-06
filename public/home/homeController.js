@@ -139,7 +139,7 @@
 		}
 		
 		var mapOptions = {
-                  zoom: 5,
+                  zoom: 10,
                   center: new google.maps.LatLng(1.290270,103.851959),
                   mapTypeId: google.maps.MapTypeId.TERRAIN
         }
