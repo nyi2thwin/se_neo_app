@@ -34,11 +34,6 @@
                 templateUrl: 'home/home.html',
                 controllerAs: 'vm'
             })
-			.when('/home', {
-                controller: 'homeController',
-                templateUrl: 'home/home.html',
-                controllerAs: 'vm'
-            })
 			.when('/viewMyInfo', {
                 controller: 'viewMyInfoController',
                 templateUrl: 'member/viewMyInfo.html',

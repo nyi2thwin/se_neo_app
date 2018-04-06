@@ -151,7 +151,7 @@ a.article, a.article:hover {
 	height: 100%;
     padding: 40px;
 	transition: all 0.3s;
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
 }
