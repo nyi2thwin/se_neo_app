@@ -14,12 +14,12 @@ var app = express();
 var User = require('./models/User');
 var Clinic = require('./models/Clinic');
 var Booking = require('./models/Booking');
+var Review = require('./models/Review');
 var bodyParser = require('body-parser');
 var NodeGeocoder = require('node-geocoder');
 
 var options = {
   provider: 'google',
- 
   // Optional depending on the providers
   httpAdapter: 'https', // Default
   apiKey: 'AIzaSyD2Nza2P2FZmM0ZY7lRf1-kYX_h-ONgPuI', // for Mapquest, OpenCage, Google Premier
@@ -51,6 +51,12 @@ hbs.registerPartials(__dirname + '/templates/layouts');
 hbs.localsAsTemplateData(app);
 app.locals.father = 'NA';
 
+
+app.use(function (err, req, res, next) {
+	console.error(err.stack)
+	res.status(500).send('Server Error!')
+})
+
 var routes = require('./route/route'); //importing route
 routes(app); //register the route
 
@@ -59,12 +65,5 @@ clinic_routes(app); //register the route
 
 
 
-//register view 
-app.use('/', require('./views/userView'));
-
-
-app.use(function(err, req, res, next) {
-  res.status(500).send(err.stack.toString());
-});
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
