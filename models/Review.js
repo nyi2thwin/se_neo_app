@@ -2,12 +2,12 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var ReviewSchema =new Schema({
-  clinicId: Number,
-  userId: Number,
-  content: String,
-  rating: Number,
-  datetime: Date
+var ReviewSchema = new Schema({
+	_clinicId: Schema.Types.ObjectId,
+	_userId: Schema.Types.ObjectId,
+	content: String,
+	rating: Number,
+	datetime: { type: Date, default: Date.now }
 });
 
-module.exports("Review", ReviewSchema);
+module.exports = mongoose.model("Review", ReviewSchema);
