@@ -1,15 +1,15 @@
 'use strict';
 module.exports = function(app){
-	var loginController = require('../controllers/loginController');
+	var accountController = require('../controllers/AccountController');
 	var bookingController = require('../controllers/BookingController');
 	app.route('/getAllusers')
-	.get(loginController.list_all_users);
+	.get(accountController.list_all_users);
 	
 	app.route('/register')
-	.post(loginController.registerNewUser);
+	.post(accountController.registerNewUser);
 	
 	app.route('/findUserById')
-	.post(loginController.findUserById);
+	.post(accountController.findUserById);
 		
 	app.route('/book')
 	.post(bookingController.createNewBooking);
