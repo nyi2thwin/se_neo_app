@@ -42,7 +42,9 @@
 				<div class="media">
 					<button type="submit" ng-click="vm.backToResult()" class="btn btn-primary">Back to Result</button>
 					<div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i></div>
+					
 					<div class="media-body pl-3">
+						
 						<div class="name"><small>{{mdata.clinic.name}}</small></div>
 						<div class="stats">
 							<span><i class="fa fa-arrows-alt"></i>Operating Hr:</span>
@@ -54,13 +56,29 @@
 							<span><i class="fa fa-arrows-alt"></i>Doctors:</span>
 							<span id="repeat" ng-repeat="dr in mdata.clinic.doctors">
 							<i class="fa fa-bath"></i>{{dr}}</span>
-							
 						</div>
-						<div class="address">{{mdata.clinic.address}}</div>
-						<div class="address">{{mdata.clinic.postalCode}}</div>
-						
+						<div class="stats">
+							<span><i class="fa fa-arrows-alt"></i>Address:</span>
+							<span><i class="fa fa-bath"></i>{{mdata.clinic.address}}</span>
+							<span><i class="fa fa-bath"></i>,</span>
+							<span><i class="fa fa-bath"></i>{{mdata.clinic.postalCode}}</span>
+						</div>
 					</div>
-					<button type="submit" ng-Click="vm.makeAppoint();" class="btn btn-primary">Make Appointment</button>
+					<fieldset class="starability-basic">
+							<input type="radio" id="rate5" name="rating" value="5" />
+							<label for="rate5" title="Amazing">5 stars</label>
+							<input type="radio" id="rate4" name="rating" value="4" />
+							<label for="rate4" title="Very good">4 stars</label>
+							<input type="radio" id="rate3" name="rating" value="3" />
+							<label for="rate3" title="Average">3 stars</label>
+							<input type="radio" id="rate2" name="rating" value="2" />
+							<label for="rate2" title="Not good">2 stars</label>
+							<input type="radio" id="rate1" name="rating" value="1" />
+							<label for="rate1" title="Terrible">1 star</label>
+					</fieldset>
+					
+					<button type="submit" ng-disabled="isGuest" ng-Click="vm.makeAppoint();" class="btn btn-primary">Make Appointment</button>
+					<span ng-show="isGuest" class="help-block">Please login to make Appointment.</span>
 				</div>
 		   
 			</div>
