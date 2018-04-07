@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <title>Neo Booking </title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+	<link href="app-content/app.css" rel="stylesheet" />
+	<link href="app-content/starability-all.min.css" rel="stylesheet" />
+</head>
+<body>
+	<div class="wrapper">
+		<!-- Sidebar Holder -->
+		<nav id="sidebar">
+			<div class="sidebar-header">
+				<h3 style = "padding: 10px;">{{userName}}</h3>
+			</div>
+			<ul class="list-unstyled components" ng-show="isGuest">
+				<li>
+					<a href="#!/login">Login</a>
+				</li>
+				<li>
+					<a href="#!/register">Register</a>
+				</li>
+			</ul>
+			<ul class="list-unstyled components" ng-show="loggedIn">
+				<li ng-show="isClinic">
+					<a href="#!/listPatient">Patients in Queue</a>
+				</li>
+				<li ng-show="isClinic">
+					<a href="#!/viewMyClinicInfo">My Clinic Info</a>
+				</li>
+				<li ng-show="!isClinic">
+					<a href="#!/home">Search Nearby Clinic</a>
+				</li>
+				<li ng-show="!isGuest && !isClinic">
+					<a href="#!/viewMyInfo">My Account Info</a>
+				</li>
+				<li ng-show="!isGuest && !isClinic">
+					<a href="#!/viewHistory">Appointment History</a>
+				</li>
+				<button type="submit" ng-click="logout();" class="btn btn-primary">Logout</button>
+			</ul>
+		</nav>
+
+		<!-- Page Content Holder -->
+		<div id="content">
+			
+			<nav class="navbar navbar-default" ng-show="loggedIn">
+				<div class="container-fluid">
+					
+					<div class="navbar-header">
+						<button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+							<i class="glyphicon glyphicon-align-left"></i>
+							<span>Toggle Sidebar</span>
+						</button>
+					</div>
+
+				</div>
+			</nav>
+			<div>
+				<div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+						
+			</div>
+			<div ng-view style="height:100%"></div>
+		</div>
+		
+	</div>
+
+	<!-- Scripts -->
+	<script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="//code.angularjs.org/1.6.0/angular.min.js"></script>
+    <script src="//code.angularjs.org/1.6.0/angular-route.min.js"></script>
+    <script src="//code.angularjs.org/1.6.0/angular-cookies.min.js"></script>
+	<script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>
+    <script src="app.js"></script>
+    <script src="app-services/authentication.service.js"></script>
+    <script src="app-services/flash.service.js"></script>
+	
+    <!-- Real user service that uses an api -->
+    <!-- <script src="app-services/user.service.js"></script> -->
+
+    <!-- Fake user service for demo that uses local storage -->
+    <script src="app-services/user.service.local-storage.js"></script>
+
+    <script src="clinic/patientListController.js"></script>
+	<script src="clinic/viewMyClinicInfoController.js"></script>
+    <script src="login/login.controller.js"></script>
+    <script src="register/register.controller.js"></script>
+	<script src="home/homeController.js"></script>
+	<script src="member/viewMyInfoController.js"></script>
+	<script src="member/viewAppointmentHistoryController.js"></script>
+</body>
+</html>
