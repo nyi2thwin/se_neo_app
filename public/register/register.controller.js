@@ -23,7 +23,7 @@
         var register =function() {
 			var deferred = $q.defer();
             vm.dataLoading = true;
-            var dataToSend = 
+            var dataToSend =
 			{
 				"userId":vm.user.nric,
 				"email":vm.user.email,
@@ -31,14 +31,13 @@
 				"contact":vm.user.contact,
 				"dob":vm.user.dob,
 				"password":vm.user.password
-			};             
-            $http.post(registerURL, dataToSend).then(
-            function(response){
-                if (response.statusText == "OK") {
-                        
+			};
+          $http.post(registerURL, dataToSend).then(
+        function(response){
+        if (response.statusText == "OK") {
 					deferred.resolve(response);
-				} else {
-					
+				}
+        else {
 					deferred.reject(response);
 				}
             },
@@ -46,10 +45,10 @@
 				FlashService.Error(response.statusText);
 				deferred.reject(response);
 			});
-			
+
 			return deferred.promise;
         }
-		
+
 		/*$scope.dobChanged = function () {
 
 				 $("#dob").datepicker({
