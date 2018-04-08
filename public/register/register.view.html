@@ -34,7 +34,7 @@
         <div class="form-group" ng-class="{ 'has-error': form.dob.$dirty && form.dob.$error.required }">
             <label for="dob">Date of Birth</label>
             <p></p>
-            <md-datepicker ng-model="vm.user.dob" md-placeholder="Enter date" md-open-on-focus></md-datepicker>
+            <md-datepicker ng-model="vm.user.dob" md-placeholder="Enter date" md-open-on-focus md-current-view="year"></md-datepicker>
             <span ng-show="form.dob.$dirty && form.dob.$error.required" class="help-block">Date of Birth is required</span>
         </div>
 

@@ -1,8 +1,8 @@
 ﻿<div>
-    <h2>My Account Info</h2>
-	<button type="submit" class="btn btn-primary" ng-disabled="!disableForm"  ng-click ="enableFormEdit()">Edit</button>
+    <h2 style= "display:inline">My Account Info</h2>
+	  <button type="submit" class="btn btn-primary" ng-disabled="!disableForm"  ng-click ="enableFormEdit()">Edit</button>
     <form name="form" role="form">
-       
+
         <div class="form-group" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
             <label for="username">Name</label>
             <input type="text" name="name" id="Text1" class="form-control" ng-disabled="disableForm" ng-model="mdata.name" required />
@@ -24,7 +24,8 @@
         </div>
 		 <div class="form-group" ng-class="{ 'has-error': form.dob.$dirty && form.dob.$error.required }">
             <label for="dob">Date of Birth</label>
-            <input type="text" name="dob" id="dob" class="form-control" ng-disabled="disableForm" ng-model="mdata.dob" required />
+            <md-datepicker name="dob" id="dob" md-open-on-focus md-current-view="year" ng-disabled="disableForm" ng-model="mdata.dob" required></md-datepicker>
+            <!-- <input type="text" name="dob" id="dob" class="form-control" ng-disabled="disableForm" ng-model="mdata.dob" required /> -->
             <span ng-show="form.dob.$dirty && form.dob.$error.required" class="help-block">Date of Birth is required</span>
         </div>
         <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
