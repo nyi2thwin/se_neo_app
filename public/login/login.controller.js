@@ -61,7 +61,7 @@
 			if (vm.username == "S1234567E"){
 				$location.path('/listPatient');
 				$rootScope.isClinic = true;
-				$rootScope.clinicId = "5ac1eea8060125dfe7296488"; //hard-code for testing purpose
+				$rootScope.clinicId = "5ac1f085060125dfe7296653"; //hard-code for testing purpose
 			}
 			else{
 				$location.path('/home');

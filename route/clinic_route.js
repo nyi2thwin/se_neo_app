@@ -13,6 +13,9 @@ module.exports = function(app){
 
 	app.route('/registerClinic')
 	.post(clinicController.registerNewClinic);
+	
+	app.route('/updateClinic')
+	.post(clinicController.editClinic);
 
 	app.route('/getNearByClinic/:postalcode')
 	.get(clinicController.listNearbyClinic);

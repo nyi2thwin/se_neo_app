@@ -5,12 +5,11 @@
         .module('app')
         .controller('viewMyClinicInfoController', viewMyClinicInfoController);
 
-    viewMyClinicInfoController.$inject = ['$scope', '$http', '$filter', '$location','$rootScope'];
-    function viewMyClinicInfoController($scope, $http, $filter, $location,$rootScope) {
+    viewMyClinicInfoController.$inject = ['$scope', '$http', '$filter', '$location','$rootScope','FlashService'];
+    function viewMyClinicInfoController($scope, $http, $filter, $location,$rootScope,FlashService) {
 		 var vm = this;
 		 var findClinicByClinicIdURL = "http://localhost:3000/findClinicById";
 		 var updateMyClinicInfoURL = "http://localhost:3000/updateClinic"; //To be update the link
-		 var clinicId = "5ac1eea8060125dfe7296488"; //hard-code for testing purpose
 		 $scope.mdata = {};
 		 var dataBeforeUpdate = {};
 		 $scope.disableForm = true;
@@ -19,7 +18,7 @@
             
             var dataToSend = 
 			{
-				"clinicId":clinicId,
+				"clinicId":$rootScope.clinicId,
 			};             
             $http.post(findClinicByClinicIdURL, dataToSend).then(
             function(response){
@@ -46,13 +45,14 @@
 		}
 		$scope.updateMyClinicInfo = function(){
 			var dataToSend = $scope.mdata;
+			delete dataToSend.reviews;
 			vm.dataLoading = true;
 			$http.post(updateMyClinicInfoURL, dataToSend).then(
             function(response){
                 if (response.statusText == "OK") {
                     $scope.mdata = response.data;
 					$scope.cancelFormEditing();
-					lashService.Success('Update successful', true);
+					FlashService.Success('Update successful', false);
 				} else {
 					FlashService.Error(response.statusText);
 					vm.dataLoading = false;

@@ -63,7 +63,7 @@ exports.deleteClinic = function(req, res) {
 };
 
 exports.editClinic = function(req, res) {
-	Clinic.findOneAndUpdate({_id: req.params.clinicId}, req.body, {new: true}, function(err, clinic) {
+	Clinic.findOneAndUpdate({_id: req.body._id}, req.body, {new: true}, function(err, clinic) {
     	if (err)
 			return res.send(err);
 		res.json(clinic);
