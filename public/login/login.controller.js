@@ -26,7 +26,8 @@
 			var userId = {"userId":vm.username};
 			$http.post(loginURL, userId).then(
             function(response){
-                if (response.statusText == "OK") {
+                if (response.statusText == "OK" && response.data) {
+					
 						if(response.data.password == vm.password){
 							AuthenticationService.SetCredentials(vm.username, vm.password,response.data);
 							$rootScope.loggedIn = true;
@@ -40,7 +41,7 @@
 						}
                                           
 				} else {
-					FlashService.Error("Invalid NRIC");
+					FlashService.Error("Invalid Username and Password");
 					vm.dataLoading = false;
 				}
             });
