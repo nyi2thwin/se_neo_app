@@ -19,6 +19,11 @@
                 templateUrl: 'clinic/viewMyClinicInfo.html',
                 controllerAs: 'vm'
             })
+			.when('/viewMyClinicReviews', {
+                controller: 'viewMyClinicReviewsController',
+                templateUrl: 'clinic/viewMyClinicReviews.html',
+                controllerAs: 'vm'
+            })
             .when('/login', {
                 controller: 'LoginController',
                 templateUrl: 'login/login.view.html',

@@ -26,7 +26,8 @@
 			var userId = {"userId":vm.username};
 			$http.post(loginURL, userId).then(
             function(response){
-                if (response.statusText == "OK") {
+                if (response.statusText == "OK" && response.data) {
+					
 						if(response.data.password == vm.password){
 							AuthenticationService.SetCredentials(vm.username, vm.password,response.data);
 							$rootScope.loggedIn = true;
@@ -40,7 +41,7 @@
 						}
                                           
 				} else {
-					FlashService.Error("Invalid NRIC");
+					FlashService.Error("Invalid Username and Password");
 					vm.dataLoading = false;
 				}
             });
@@ -60,7 +61,7 @@
 			if (vm.username == "S1234567E"){
 				$location.path('/listPatient');
 				$rootScope.isClinic = true;
-				$rootScope.clinicId = "5ac1eea8060125dfe7296488"; //hard-code for testing purpose
+				$rootScope.clinicId = "5ac1f085060125dfe7296653"; //hard-code for testing purpose
 			}
 			else{
 				$location.path('/home');
