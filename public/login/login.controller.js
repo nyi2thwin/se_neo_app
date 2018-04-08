@@ -11,7 +11,6 @@
 
         var vm = this;
 		var loginURL = "http://localhost:3000/findUserById";
-		$rootScope.userId = vm.username; 
 		$rootScope.isClinic = false;
 		$rootScope.isGuest = false;
         vm.login = login;
@@ -29,7 +28,7 @@
             function(response){
                 if (response.statusText == "OK") {
 						if(response.data.password == vm.password){
-							AuthenticationService.SetCredentials(vm.username, vm.password);
+							AuthenticationService.SetCredentials(vm.username, vm.password,response.data);
 							$rootScope.loggedIn = true;
 							$rootScope.userName = response.data.name;
 							isClinicAdmin();

@@ -4,14 +4,27 @@
     angular
         .module('app')
         .controller('homeController', homeController);
-
-    homeController.$inject = ['$scope', '$http', '$filter', '$location','$rootScope','FlashService'];
-    function homeController($scope, $http, $filter, $location,$rootScope,FlashService) {
+	
+	homeController.$inject = ['$scope','$http','$rootScope','FlashService','$q','$filter'];
+    function homeController($scope, $http,$rootScope,FlashService,$q,$filter) {
 		var vm = this;
+		vm.dataLoading = false;
 		
 		$scope.hideSearchBox = true;
 		$scope.hideSearchResult = true;
 		$scope.hideDetailResult = true;
+		$scope.showReviewBox = false;
+		$scope.firstRate = 0;
+		$scope.newComment = "";
+		$scope.mdata ={};
+		$scope.clinicList = {};
+		
+		
+		var addReviewURL = "http://localhost:3000/addReview";
+		var viewClinicDetailURL = "http://localhost:3000/findClinicById";
+		var findBookingByClinicIdURL = "http://localhost:3000/findBookingByClinicId";
+		var bookURL = "http://localhost:3000/book";
+		
 		var loggedIn = $rootScope.globals.currentUser;
 		if(!loggedIn){
 			$rootScope.isGuest = true;
@@ -19,14 +32,9 @@
 		else{
 			$rootScope.isGuest = false;
 		}
-		var findNearByClinicURL = "http://localhost:3000/getNearByClinic/"+$scope.postalCode;
-		var findBookingByClinicIdURL = "http://localhost:3000/findBookingByClinicId";
-		var bookURL = "http://localhost:3000/book";
-		$scope.mdata ={};
-		$scope.clinicList = {};
-		vm.dataLoading = false;
-		vm.search = search;
-		function search() {
+		
+	
+		vm.search = function() {
             vm.dataLoading = true;
 			var findNearByClinicURL = "http://localhost:3000/getNearByClinic/"+$scope.postalCode;
             $http.get(findNearByClinicURL).then(
@@ -48,15 +56,29 @@
 		
         }
 		vm.viewDetail = function(clinic){
-			$scope.hideSearchResult = true;
-			$scope.hideDetailResult = false;
-			$scope.mdata.clinic = clinic;
+			
+			vm.dataLoading = true;
+            var dataToSend = 
+			{
+				"clinicId":clinic._id,
+			};             
+            $http.post(viewClinicDetailURL, dataToSend).then(
+            function(response){
+                if (response.statusText == "OK") {
+					$scope.hideSearchResult = true;
+					$scope.hideDetailResult = false;
+					$scope.mdata.clinic = response.data;
+					vm.dataLoading = false;
+				} else {
+					FlashService.Error(response.statusText);
+					vm.dataLoading = false;
+				}
+            });
 		}
 		vm.backToResult = function(){
 			$scope.hideSearchResult = false;
 			$scope.hideDetailResult = true;
 		}
-		
 		vm.makeAppoint = function(){
 			vm.dataLoading = true;
             var dataToSend = 
@@ -82,7 +104,46 @@
 				}
             });
 		}
-		
+		vm.enableReviewBox = function(){
+			$scope.showReviewBox = true;
+		}
+		vm.cancelReview = function(){
+			$scope.showReviewBox = false;
+			$scope.firstRate = 0;
+			$scope.newComment = "";
+		}
+		vm.submitReview = function(){
+			var deferred = $q.defer();
+            vm.dataLoading = true;
+            var dataToSend = 
+			{
+				"_clinicId":$scope.mdata.clinic._id,
+				"_userId":loggedIn.userID,
+				"content":$scope.newComment,
+				"username":loggedIn.name,
+				"rating":$scope.firstRate,
+				"datetime":new Date()
+			};          
+			
+            $http.post(addReviewURL, dataToSend).then(
+            function(response){
+                if (response.statusText == "OK") {
+                   $scope.mdata.clinic.reviews.push(response.data);
+					vm.cancelReview();
+					vm.dataLoading = false;
+					deferred.resolve(response);
+				} else {
+					vm.dataLoading = false;
+					deferred.reject(response);
+				}
+            },
+			function (response) {
+				FlashService.Error(response.statusText);
+				deferred.reject(response);
+			});
+			
+			return deferred.promise;
+		}
 		var book = function(newQno){
 			var currentDate =  $filter('date')(new Date(), "MM-dd-yyyy");
 			//prepare booking obj
@@ -141,6 +202,10 @@
 			e.preventDefault();
 			google.maps.event.trigger(selectedMarker, 'click');
 		}
+
+	
+	
+	
 
     }
 

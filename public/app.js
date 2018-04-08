@@ -2,11 +2,11 @@
     'use strict';
 
     angular
-        .module('app', ['ngRoute', 'ngCookies'])
-        .config(config)
-        .run(run);
+		.module('app', ['ngRoute', 'ngCookies','ngMaterial','jkAngularRatingStars'])
+		.config(config)
+		.run(run);
 
-    config.$inject = ['$routeProvider', '$locationProvider'];
+	config.$inject = ['$routeProvider', '$locationProvider'];
     function config($routeProvider, $locationProvider) {
         $routeProvider
             .when('/listPatient', {
@@ -50,11 +50,13 @@
 
     run.$inject = ['$rootScope', '$location', '$cookies', '$http'];
     function run($rootScope, $location, $cookies, $http) {
-        // keep user logged in after page refresh
-        $rootScope.globals = $cookies.getObject('globals') || {};
+		$rootScope.loggedIn = false;
 		$rootScope.isClinic = false;
 		$rootScope.isGuest = false;
-		$rootScope.loggedIn = false;
+		
+        // keep user logged in after page refresh
+        $rootScope.globals = $cookies.getObject('globals') || {};
+	
 		if ($rootScope.globals.currentUser) {
 			$rootScope.loggedIn = true;
             $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;

@@ -42,7 +42,6 @@
 				<div class="media">
 					<button type="submit" ng-click="vm.backToResult()" class="btn btn-primary">Back to Result</button>
 					<div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i></div>
-					
 					<div class="media-body pl-3">
 						
 						<div class="name"><small>{{mdata.clinic.name}}</small></div>
@@ -64,26 +63,31 @@
 							<span><i class="fa fa-bath"></i>{{mdata.clinic.postalCode}}</span>
 						</div>
 					</div>
-					<div>Rating: {{rating.value}}</div>
-
-					<div data-angular-rating ng-model='rating.value' max={{maxValue}} default-value=2 icon-empty="fa-star-o" icon-full="fa-star" icon-hover="fa-star" color-base="black" color-selected="orange" color-hover="orange" icon-size="50" on-change="fn()" decimal>
+					<button type="submit" ng-disabled="isGuest" ng-Click="vm.makeAppoint();" class="btn btn-primary">Make Appointment</button>
+					<button type="submit" ng-disabled="isGuest" ng-Click="vm.enableReviewBox();" class="btn btn-primary">Write Review</button>
+					
+					<span ng-show="isGuest" class="help-block">Please login to make Appointment and Review.</span>
+					
+					<div class="form-group" ng-show="showReviewBox">
+						<label for="comment">Review:</label>
+						<jk-rating-stars rating="firstRate"></jk-rating-stars>
+						<textarea class="form-control" rows="5" id="comment" ng-model="newComment"></textarea>
+						<button type="button" class="btn btn-danger" ng-Click="vm.cancelReview();">Cancel</button>
+						<button type="button" class="btn btn-success" ng-Click="vm.submitReview();">Submit</button>
+					</div>
+									
+					<div class="media-body pl-3" ng-repeat="review in mdata.clinic.reviews">
+						<jk-rating-stars rating="review.rating" read-only="true" ></jk-rating-stars>
+						<div class="name"><small>{{review.username}}</small></div>
+						<div class="stats">
+							<span><i class="fa fa-arrows-alt"></i>Review:</span>
+							<span><i class="fa fa-bath"></i>{{review.content}}</span>
+							
+						</div>
+						<div class="address">{{review.datetime}} </div>
+						
 					</div>
 					
-					<fieldset class="starability-basic" >
-							<input type="radio" id="rate1" name="rating" value="1" />
-							<label for="rate1" title="Terrible">1 star</label>
-							<input type="radio" id="rate2" name="rating" value="2" />
-							<label for="rate2" title="Not good">2 stars</label>
-							<input type="radio" id="rate3" name="rating" value="3" />
-							<label for="rate3" title="Average">3 stars</label>
-							<input type="radio" id="rate4" name="rating" value="4" />
-							<label for="rate4" title="Very good">4 stars</label>
-							<input type="radio" id="rate5" name="rating" value="5" />
-							<label for="rate5" title="Amazing">5 stars</label>
-					</fieldset>
-					
-					<button type="submit" ng-disabled="isGuest" ng-Click="vm.makeAppoint();" class="btn btn-primary">Make Appointment</button>
-					<span ng-show="isGuest" class="help-block">Please login to make Appointment.</span>
 				</div>
 		   
 			</div>
