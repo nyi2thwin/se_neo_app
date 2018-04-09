@@ -9,7 +9,7 @@
     function viewMyClinicInfoController($scope, $http, $filter, $location,$rootScope,FlashService) {
 		 var vm = this;
 		 var findClinicByClinicIdURL = "http://localhost:3000/findClinicById";
-		 var updateMyClinicInfoURL = "http://localhost:3000/updateClinic"; //To be update the link
+		 var updateMyClinicInfoURL = "http://localhost:3000/updateClinic";
 		 $scope.mdata = {};
 		 var dataBeforeUpdate = {};
 		 $scope.disableForm = true;
@@ -30,9 +30,9 @@
 					vm.dataLoading = false;
 				}
             },
-			function (response) {                          
-				FlashService.Error(response.statusText);
+			function (response) {
 				vm.dataLoading = false;
+				FlashService.Error("Error Connection Refused");
 			});
 		}
 		
@@ -51,7 +51,8 @@
             function(response){
                 if (response.statusText == "OK") {
                     $scope.mdata = response.data;
-					$scope.cancelFormEditing();
+					$scope.disableForm = true;
+					$rootScope.userName = response.data.name;
 					FlashService.Success('Update successful', false);
 					dataBeforeUpdate = angular.copy($scope.mdata);
 				} else {

@@ -33,21 +33,21 @@
 				"password":vm.user.password
 			};
           $http.post(registerURL, dataToSend).then(
-        function(response){
-        if (response.statusText == "OK") {
-					deferred.resolve(response);
+			function(response){
+				if (response.statusText == "OK") {
+							deferred.resolve(response);
 				}
-        else {
-					deferred.reject(response);
+				else {
+							deferred.reject(response);
 				}
-            },
+			},
 			function (response) {
 				FlashService.Error(response.statusText);
 				deferred.reject(response);
 			});
 
 			return deferred.promise;
-        }
+		}
 
 		/*$scope.dobChanged = function () {
 

@@ -118,7 +118,7 @@
             var dataToSend = 
 			{
 				"_clinicId":$scope.mdata.clinic._id,
-				"_userId":loggedIn.userID,
+				"_userId":loggedIn.id,
 				"content":$scope.newComment,
 				"username":loggedIn.name,
 				"rating":$scope.firstRate,

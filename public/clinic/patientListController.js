@@ -28,6 +28,10 @@
 						FlashService.Error(response.statusText);
 						vm.dataLoading = false;
 					}
+				},	
+				function (response) {
+					vm.dataLoading = false;
+					FlashService.Error("Error Connection Refused");
 				});
 
 		}
@@ -47,6 +51,10 @@
 						FlashService.Error(response.statusText);
 						vm.dataLoading = false;
 					}
+				},
+				function (response) {
+					vm.dataLoading = false;
+					FlashService.Error("Error Connection Refused");
 				});
 
 		}
@@ -67,6 +75,10 @@
 						FlashService.Error(response.statusText);
 						vm.dataLoading = false;
 					}
+				},
+				function (response) {
+					vm.dataLoading = false;
+					FlashService.Error("Error Connection Refused");
 				});
 
 			}

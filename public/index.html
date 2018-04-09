@@ -15,6 +15,9 @@
 		<!-- Sidebar Holder -->
 		<nav id="sidebar">
 			<div class="sidebar-header">
+				<a href="#!/home">
+					<img src="./pics/NeoBookingLogo.png" width="95%" alt="NeoBooking" />
+				</a>
 				<h3 style = "padding: 10px;">{{userName}}</h3>
 			</div>
 			<ul class="list-unstyled components" ng-show="isGuest">
@@ -44,7 +47,6 @@
 				<li ng-show="!isGuest && !isClinic">
 					<a href="#!/viewHistory">Appointment History</a>
 				</li>
-				<button type="submit" ng-click="logout();" class="btn btn-primary">Logout</button>
 			</ul>
 		</nav>
 
@@ -58,6 +60,9 @@
 						<button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
 							<i class="glyphicon glyphicon-align-left"></i>
 							<span>Sidebar</span>
+						</button>
+						<button type="submit" ng-click="logout();" ng-show="loggedIn" class="btn btn-warn" mat-button color="warn">
+							Logout
 						</button>
 					</div>
 

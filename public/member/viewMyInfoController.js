@@ -27,9 +27,9 @@
 					vm.dataLoading = false;
 				}
             },
-			function (response) {                          
-				FlashService.Error(response.statusText);
+			function (response) {
 				vm.dataLoading = false;
+				FlashService.Error("Error Connection Refused");
 			});
 		}
 		
@@ -51,16 +51,20 @@
 					$rootScope.userName = response.data.name;
 					FlashService.Success('Update successful', false);
 					vm.dataLoading = false;
+				
 				} else {
 					FlashService.Error(response.statusText);
 					vm.dataLoading = false;
+				
 				}
             },
-			function (response) {                          
-				FlashService.Error(response.statusText);
+			function (response) {
 				vm.dataLoading = false;
+				FlashService.Error("Error Connection Refused");
 			});
+
 		}
+		
 		init();
 		
     }
