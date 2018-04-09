@@ -1,7 +1,8 @@
 'use strict';
 var mongoose = require('mongoose'),
 	Booking = mongoose.model('Booking'),
-	User = mongoose.model('User');
+	User = mongoose.model('User'),
+	request = require('request');
 
 
 exports.findBookingByClinicId = function(req,res){
@@ -34,10 +35,10 @@ exports.deleteBooking = function(req, res) {
 
 exports.sendNotification = function(req, res) {
 	//send whatapp or telegram msg code here
-	Booking.find({_id:req.body.bookingId}, function(err,booking) {
+	Booking.findOne({_id:req.body.bookingId}, function(err,booking) {
 		if(err)
 			res.send(err);
-		User.find({userId:booking.userId}, function(err,user) {
+		User.findOne({userId:booking.userId}, function(err,user) {
 			if(err)
 					res.send(err);
 				res.json({ message: 'Notification successfully sent to '+user.contact+"!" });
