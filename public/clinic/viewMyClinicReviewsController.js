@@ -15,17 +15,17 @@
             
             var dataToSend = 
 			{
-				"clinicId":$rootScope.globals.currentUser.userID,
+				"clinicId":$rootScope.globals.currentUser.id,
 			};             
             $http.post(findClinicByClinicIdURL, dataToSend).then(
             function(response){
-                if (response.statusText == "OK" && response.data) {
+                if (response.statusText == "OK" && response.data.reviews) {
 					if(response.data.reviews.length == 0){
 						FlashService.Error("Your Clinic have any reviews yet!");
 					}
                     $scope.mdata.reviews = response.data.reviews;
 				} else {
-					FlashService.Error(response.statusText);
+					FlashService.Error("Unable to retrieve Reviews!Please Contact Admin!");
 					vm.dataLoading = false;
 				}
             },

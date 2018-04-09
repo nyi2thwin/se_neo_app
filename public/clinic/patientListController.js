@@ -9,7 +9,7 @@
     function patientListController($scope, $http, $filter, $location,$rootScope,FlashService) {
 		var vm = this;
 		var findBookingByClinicIdURL = "/findBookingByClinicId";
-		var clinicId = $rootScope.globals.currentUser.userID;
+		var clinicId = $rootScope.globals.currentUser.id;
 		$scope.patientList = {};
 
 		$scope.unqueue = function(bookingId){
