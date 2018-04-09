@@ -11,6 +11,9 @@ module.exports = function(app){
 	app.route('/findUserById')
 	.post(accountController.findUserById);
 		
+	app.route('/updateUser')
+	.post(accountController.update_userinfo);
+	
 	app.route('/book')
 	.post(bookingController.createNewBooking);
 	

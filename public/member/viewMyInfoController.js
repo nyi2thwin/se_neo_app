@@ -5,12 +5,11 @@
         .module('app')
         .controller('viewMyInfoController', viewMyInfoController);
 
-    viewMyInfoController.$inject = ['$scope', '$http', '$filter', '$location','$rootScope'];
-    function viewMyInfoController($scope, $http, $filter, $location,$rootScope) {
+    viewMyInfoController.$inject = ['$scope', '$http', '$filter', '$location','$rootScope','FlashService'];
+    function viewMyInfoController($scope, $http, $filter, $location,$rootScope,FlashService) {
 		 var vm = this;
 		 var findUserByIdURL = "http://localhost:3000/findUserById";
-		 var updateMyInfoURL = "http://localhost:3000/updateUserInfo"; //To be update the link
-		 var clinicId = "5ac1eea8060125dfe7296488"; //hard-code for testing purpose
+		 var updateMyInfoURL = "http://localhost:3000/updateUser";
 		 $scope.mdata = {};
 		 var dataBeforeUpdate = {};
 		 $scope.disableForm = true;
@@ -49,7 +48,8 @@
                 if (response.statusText == "OK") {
                     $scope.mdata = response.data;
 					$scope.cancelFormEditing();
-					lashService.Success('Update successful', true);
+					FlashService.Success('Update successful', false);
+					vm.dataLoading = false;
 				} else {
 					FlashService.Error(response.statusText);
 					vm.dataLoading = false;

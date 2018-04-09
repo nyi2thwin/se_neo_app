@@ -29,7 +29,7 @@ exports.list_all_users = function(req, res) {
 };
 
 exports.update_userinfo = function(req, res) {
-  User.findOneAndUpdate({_id: req.params.userId}, req.body, {new: true}, function(err, user) {
+  User.findOneAndUpdate({_id: req.body._id}, req.body, {new: true}, function(err, user) {
     if (err)
       res.send(err);
     res.json(user);
