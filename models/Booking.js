@@ -13,13 +13,16 @@ var BookingSchema = new Schema({
 	},
 
 	dateTime: {
-		type:Date
+		type:Date,
+		required: 'Kindly enter DateTime'
 	},
 	queNo: {
-		type:Number
+		type:Number,
+		required: 'Kindly enter queNo'
 	},
-	stauts: {
-		type:String
+	status: {
+		type:String,
+		required: 'Kindly enter status'
 	},
 	estimatedTime: {
 		type:Number
