@@ -54,6 +54,7 @@
 					$scope.disableForm = true;
 					$rootScope.userName = response.data.name;
 					FlashService.Success('Update successful', false);
+					vm.dataLoading = false;
 					dataBeforeUpdate = angular.copy($scope.mdata);
 				} else {
 					FlashService.Error(response.statusText);
