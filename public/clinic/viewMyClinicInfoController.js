@@ -18,7 +18,7 @@
             
             var dataToSend = 
 			{
-				"clinicId":$rootScope.clinicId,
+				"clinicId":$rootScope.globals.currentUser.userID,
 			};             
             $http.post(findClinicByClinicIdURL, dataToSend).then(
             function(response){
@@ -53,6 +53,7 @@
                     $scope.mdata = response.data;
 					$scope.cancelFormEditing();
 					FlashService.Success('Update successful', false);
+					dataBeforeUpdate = angular.copy($scope.mdata);
 				} else {
 					FlashService.Error(response.statusText);
 					vm.dataLoading = false;

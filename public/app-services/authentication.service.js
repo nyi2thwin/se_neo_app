@@ -41,7 +41,7 @@
 
         }
 
-        function SetCredentials(username, password,data) {
+        function SetCredentials(username, password,data,isClinic) {
             var authdata = Base64.encode(username + ':' + password);
 
             $rootScope.globals = {
@@ -49,7 +49,8 @@
                     username: username, //NRIC
 					authdata: authdata,
 					userID: data._id,
-					name:data.name
+					name:data.name,
+                    isClinic:isClinic
                     
                 }
             };

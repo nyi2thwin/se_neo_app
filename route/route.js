@@ -19,4 +19,11 @@ module.exports = function(app){
 	
 	app.route('/findBookingByClinicId')
 	.post(bookingController.findBookingByClinicId);
+
+	
+	app.route('/deleteBooking')
+	.post(bookingController.deleteBooking);
+
+	app.route('/sendNotification')
+	.post(bookingController.sendNotification);
 };

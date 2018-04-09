@@ -23,7 +23,7 @@
                 if (response.statusText == "OK" && response.data) {
 					
 						if(response.data._id == vm.username && vm.password == "123123123"){
-							AuthenticationService.SetCredentials(vm.username, vm.password,response.data);
+							AuthenticationService.SetCredentials(vm.username, vm.password,response.data,true);
 							$rootScope.loggedIn = true;
 							$rootScope.userName = response.data.name;
 							$rootScope.isClinic = true;
