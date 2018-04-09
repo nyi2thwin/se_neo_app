@@ -47,7 +47,8 @@
             function(response){
                 if (response.statusText == "OK") {
                     $scope.mdata = response.data;
-					$scope.cancelFormEditing();
+					$scope.disableForm = true;
+					$rootScope.userName = response.data.name;
 					FlashService.Success('Update successful', false);
 					vm.dataLoading = false;
 				} else {
