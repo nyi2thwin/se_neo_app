@@ -8,6 +8,8 @@ exports.findClinicById = function(req,res){
 	Clinic.findOne({_id:req.body.clinicId}, function(err,clinic) {
 		if(err)
 			return res.send(err);
+		if(!clinic)
+			return res.json({});
 		Review.find({_clinicId:req.body.clinicId}, function(err,reviews){
 			if(err)
 				return res.send(err);
