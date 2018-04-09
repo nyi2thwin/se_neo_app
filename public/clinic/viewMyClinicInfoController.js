@@ -18,7 +18,7 @@
             
             var dataToSend = 
 			{
-				"clinicId":$rootScope.globals.currentUser.userID,
+				"clinicId":$rootScope.globals.currentUser.id,
 			};             
             $http.post(findClinicByClinicIdURL, dataToSend).then(
             function(response){
