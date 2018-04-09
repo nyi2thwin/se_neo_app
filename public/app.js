@@ -48,6 +48,10 @@
                 controller: 'viewAppointmentHistoryController',
                 templateUrl: 'member/viewAppointmentHistory.html',
                 controllerAs: 'vm'
+            }).when('/admin', {
+                controller: 'AdminController',
+                templateUrl: 'admin/admin.view.html',
+                controllerAs: 'vm'
             })
 
             .otherwise({ redirectTo: '/login' });
@@ -91,7 +95,7 @@
 
        $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in and trying to access a restricted page
-            var restrictedPage = $.inArray($location.path(), ['/login', '/register','/home']) === -1;
+            var restrictedPage = $.inArray($location.path(), ['/login', '/register','/home','/admin']) === -1;
             var loggedIn = $rootScope.globals.currentUser;
 			
 		    if (restrictedPage && !loggedIn) {
@@ -107,10 +111,8 @@
         });
 		
 		var isClinicAdmin = function(){
-			if ($rootScope.globals.currentUser.username == "S1234567E"){
+			if ($rootScope.isClinic){
 				$location.path('/listPatient');
-				$rootScope.isClinic = true;
-				
 			}
 			else{
 				$location.path('/home');

@@ -50,14 +50,14 @@
 
 		<!-- Page Content Holder -->
 		<div id="content">
-			
+
 			<nav class="navbar navbar-default" ng-show="loggedIn">
 				<div class="container-fluid">
-					
+
 					<div class="navbar-header">
 						<button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
 							<i class="glyphicon glyphicon-align-left"></i>
-							<span>Toggle Sidebar</span>
+							<span>Sidebar</span>
 						</button>
 					</div>
 
@@ -65,11 +65,11 @@
 			</nav>
 			<div>
 				<div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
-						
+
 			</div>
 			<div ng-view style="height:100%"></div>
 		</div>
-		
+
 	</div>
 
 	<!-- Scripts -->
@@ -80,20 +80,20 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
-	
+
 	<script src="//code.angularjs.org/1.6.0/angular-route.min.js"></script>
     <script src="//code.angularjs.org/1.6.0/angular-cookies.min.js"></script>
-	
+
 	<!-- Angular Material Library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
 	<!-- Google Map API -->
 	<script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>
-	
+
     <script src="app.js"></script>
     <script src="app-services/authentication.service.js"></script>
     <script src="app-services/flash.service.js"></script>
 	<script src="app-services/jk-rating-stars.min.js"></script>
-	
+
 	<!-- Fake user service for demo that uses local storage -->
     <script src="app-services/user.service.local-storage.js"></script>
 
@@ -101,6 +101,7 @@
 	<script src="clinic/viewMyClinicInfoController.js"></script>
 	<script src="clinic/viewMyClinicReviewsController.js"></script>
     <script src="login/login.controller.js"></script>
+    <script src="admin/admin.controller.js"></script>
     <script src="register/register.controller.js"></script>
 	<script src="home/homeController.js"></script>
 	<script src="member/viewMyInfoController.js"></script>
