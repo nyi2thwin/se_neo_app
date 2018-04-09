@@ -48,7 +48,7 @@
                 currentUser: {
                     username: username, //NRIC
 					authdata: authdata,
-					userID: data._id,
+					id: data._id,
 					name:data.name,
                     isClinic:isClinic
                     

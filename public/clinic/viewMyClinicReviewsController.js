@@ -29,9 +29,9 @@
 					vm.dataLoading = false;
 				}
             },
-			function (response) {                          
-				FlashService.Error(response.statusText);
+			function (response) {
 				vm.dataLoading = false;
+				FlashService.Error("Error Connection Refused");
 			});
 		}
 		
