@@ -39,11 +39,8 @@
 			</div>
 			<div class="col-md-5 listing-block" ng-hide="hideDetailResult">
 				<div class="media">
-
-					<md-button type="submit" ng-click="vm.backToResult()" class="md-raised">Back to Result</md-button>
 					<div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i></div>
 					<div class="media-body pl-3">
-						
 						<div class="name"><small>{{mdata.clinic.name}}</small></div>
 						<div class="stats">
 							<span><i class="fa fa-arrows-alt"></i>Operating Hr:</span>
@@ -63,17 +60,20 @@
 							<span><i class="fa fa-bath"></i>{{mdata.clinic.postalCode}}</span>
 						</div>
 					</div>
-					<button type="submit" ng-disabled="isGuest" ng-Click="vm.makeAppoint();" class="btn btn-primary">Make Appointment</button>
-					<button type="submit" ng-disabled="isGuest" ng-Click="vm.enableReviewBox();" class="btn btn-primary">Write Review</button>
-					
-					<span ng-show="isGuest" class="help-block">Please login to make Appointment and Review.</span>
-					
+					<md-button type="submit" ng-click="vm.backToResult()" class="md-warn md-raised md-hue-2">Back to Result</md-button>
+					<md-button type="submit" ng-disabled="isGuest" ng-Click="vm.enableReviewBox();" class="md-raised md-primary">Write Review</md-button>
+					<md-button type="submit" ng-disabled="isGuest" ng-Click="vm.makeAppoint();" class="md-raised md-primary">Make Appointment</md-button>
+					<span ng-show="isGuest" class="help-block">Please
+						<a href="#!/login"><span class="btn-link">login</span></a>to make Appointment and Review.</span>
+
 					<div class="form-group" ng-show="showReviewBox">
 						<label for="comment">Review:</label>
 						<jk-rating-stars rating="firstRate"></jk-rating-stars>
 						<textarea class="form-control" rows="5" id="comment" ng-model="newComment"></textarea>
-						<button type="button" class="btn btn-danger" ng-Click="vm.cancelReview();">Cancel</button>
-						<button type="button" class="btn btn-success" ng-Click="vm.submitReview();">Submit</button>
+						<div align="right">
+							<md-button type="button" md-no-ink class="md-primary" ng-Click="vm.cancelReview();">Cancel</md-button>
+							<md-button type="button" class="md-raised md-primary" ng-Click="vm.submitReview();">Submit</md-button>
+						</div>
 					</div>
 									
 					<div class="media-body pl-3" ng-repeat="review in mdata.clinic.reviews">
