@@ -16,7 +16,7 @@
 		<nav id="sidebar">
 			<div class="sidebar-header">
 				<a href="#!/home">
-					<img src="./pics/NeoBookingLogo.png" width="95%" alt="NeoBooking" />
+					<img src="./app-content/pics/NeoBookingLogo.png" width="95%" alt="NeoBooking" />
 				</a>
 				<h3 style = "padding: 10px;">{{userName}}</h3>
 			</div>
@@ -98,17 +98,19 @@
     <script src="app-services/authentication.service.js"></script>
     <script src="app-services/flash.service.js"></script>
 	<script src="app-services/jk-rating-stars.min.js"></script>
-    <script src="app-services/user.service.js"></script>
-	<script src="app-services/booking.service.js"></script>
 
-    <script src="clinic/patientListController.js"></script>
-	<script src="clinic/viewMyClinicInfoController.js"></script>
-	<script src="clinic/viewMyClinicReviewsController.js"></script>
-    <script src="login/login.controller.js"></script>
-    <script src="clinic/admin.controller.js"></script>
-    <script src="register/register.controller.js"></script>
-	<script src="home/homeController.js"></script>
-	<script src="member/viewMyInfoController.js"></script>
-	<script src="member/viewAppointmentHistoryController.js"></script>
+    <script src="model-services/user.service.js"></script>
+	<script src="model-services/booking.service.js"></script>
+
+    <script src="clinic-view-controllers/patientListController.js"></script>
+	<script src="clinic-view-controllers/viewMyClinicInfoController.js"></script>
+	<script src="clinic-view-controllers/viewMyClinicReviewsController.js"></script>
+    <script src="clinic-view-controllers/admin.controller.js"></script>
+
+	<script src="member-view-controllers/login.controller.js"></script>
+    <script src="member-view-controllers/register.controller.js"></script>
+	<script src="member-view-controllers/homeController.js"></script>
+	<script src="member-view-controllers/viewMyInfoController.js"></script>
+	<script src="member-view-controllers/viewAppointmentHistoryController.js"></script>
 </body>
 </html>

@@ -1,0 +1,42 @@
+﻿<div>
+    <h2 style= "display:inline">My Account Info</h2>
+	  <button type="submit" class="btn btn-primary" ng-disabled="!disableForm"  ng-click ="enableFormEdit()">Edit</button>
+    <form name="form" role="form">
+
+        <div class="form-group" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
+            <label for="username">Name</label>
+            <input type="text" name="name" id="Text1" class="form-control" ng-disabled="disableForm" ng-model="mdata.name" required />
+            <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Name is required</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.userId.$dirty && form.userId.$error.required }">
+            <label for="userId">NRIC</label>
+            <input type="text" name="userId" id="userId" class="form-control" ng-disabled="true" ng-model="mdata.userId" required />
+        </div>
+		<div class="form-group" ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }">
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" class="form-control" ng-disabled="disableForm" ng-model="mdata.email" required />
+            <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email is required</span>
+        </div>
+		<div class="form-group" ng-class="{ 'has-error': form.contact.$dirty && form.contact.$error.required }">
+            <label for="contact">Contact</label>
+            <input type="text" name="contact" id="contact" class="form-control" ng-disabled="disableForm" ng-model="mdata.contact" required />
+            <span ng-show="form.contact.$dirty && form.contact.$error.required" class="help-block">Contact is required</span>
+        </div>
+		 <div class="form-group" ng-class="{ 'has-error': form.dob.$dirty && form.dob.$error.required }">
+            <label for="dob">Date of Birth</label>
+            <md-datepicker name="dob" id="dob" md-open-on-focus md-current-view="year" ng-disabled="disableForm" ng-model="mdata.dob" required></md-datepicker>
+            <!-- <input type="text" name="dob" id="dob" class="form-control" ng-disabled="disableForm" ng-model="mdata.dob" required /> -->
+            <span ng-show="form.dob.$dirty && form.dob.$error.required" class="help-block">Date of Birth is required</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" class="form-control" ng-disabled="disableForm" ng-model="mdata.password" required />
+            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+        </div>
+        <div class="form-actions" ng-disabled="disableForm"  ng-hide ="disableForm">
+            <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" ng-click ="updateMyInfo()" class="btn btn-primary">Submit</button>
+            <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+			<button type="submit" class="btn btn-primary" ng-click ="cancelFormEditing()">Cancel</button>
+        </div>
+    </form>
+</div>
