@@ -66,9 +66,7 @@
 					<button type="submit" ng-disabled="isGuest" ng-Click="vm.makeAppoint();" class="btn btn-primary">Make Appointment</button>
 					<button type="submit" ng-disabled="isGuest" ng-Click="vm.enableReviewBox();" class="btn btn-primary">Write Review</button>
 					
-					<span ng-show="isGuest" class="help-block">Please
-						<a href="#!/login"><span class="btn-link">login</span></a>
-						to make Appointment and Review.</span>
+					<span ng-show="isGuest" class="help-block">Please login to make Appointment and Review.</span>
 					
 					<div class="form-group" ng-show="showReviewBox">
 						<label for="comment">Review:</label>
