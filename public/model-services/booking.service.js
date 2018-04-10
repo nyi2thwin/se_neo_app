@@ -1,0 +1,95 @@
+﻿(function () {
+    'use strict';
+
+    angular
+        .module('app')
+        .factory('BookingService', BookingService);
+
+    BookingService.$inject = ['$rootScope','$http','$filter'];
+    function BookingService($rootScope,$http,$filter) {
+        var service = {};
+		var findBookingByClinicIdURL = "http://localhost:3000/findBookingByClinicId";
+		var createBookingURL = "http://localhost:3000/createBooking";
+
+        service.MakeAppointment = MakeAppointment;
+        return service;
+		
+		
+        function MakeAppointment(userId,clinicId,callback){
+			var response;
+			findBookingByClinicId(clinicId).then(function (booking) {
+				if (booking !== null && booking.success) {
+					var lastIndex = booking.data.length;
+					var lastQno = 0;
+					var estimatedTime = 0;
+					if(lastIndex != 0){
+						lastQno = booking.data[lastIndex-1].queNo;
+						estimatedTime = lastQno * 5 ;
+					}
+					
+					var currentDate =  $filter('date')(new Date(), "MM-dd-yyyy");
+					var newQno = lastQno + 1;
+					
+
+					//prepare data obj
+					var data =
+					{
+						"userId": userId,
+						"clinicId":clinicId,
+						"dateTime":currentDate,
+						"queNo":newQno,
+						"status":"waiting",
+						"estimatedTime":estimatedTime
+					}
+					
+					//createNewBooking
+					createBooking(data).then(function (newBooking) {
+						if(newBooking !== null && newBooking.success) {
+							var msg = ". Please proceed to to clinic in 5 min(s). Clinic is right to cancel booking for not showing up in time."; 
+						
+							response = handleResponse("Appointment Successful.Your Quno is "+newQno.toString()+". Estimated Time is "+estimatedTime.toString()+" min(s)"+msg , true);
+							
+						} else {
+							response = newBooking;
+						}
+						callback(response);
+									
+					});
+
+				} else {
+					response = { success: false, message: 'Error Making Appointment' };
+				}
+				
+			});
+        }
+		
+		function findBookingByClinicId(clinicId) {
+			 var dataToSend = 
+			{
+				"clinicId":clinicId,  //$scope.mdata.clinic._id,
+			};    
+			
+            return $http.post(findBookingByClinicIdURL,dataToSend).then(handleSuccess, handleError('Error getting BookingService by ClinicId'));
+        }
+		
+		function createBooking(booking) {
+		    return $http.post(createBookingURL,booking).then(handleSuccess, handleError('Error creating Booking'));
+        }
+
+		function handleResponse(msg , status) {
+            return { success: status, message:msg };
+        }
+		
+        function handleSuccess(res) {
+            return { success: true, data: res.data };
+        }
+
+        function handleError(error) {
+            return function () {
+                return { success: false, message: error };
+            };
+        }
+
+    }
+
+})();
