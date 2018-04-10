@@ -23,11 +23,12 @@
         }
 
         function GetById(id) {
-            return $http.get('/api/users/' + id).then(handleSuccess, handleError('Error getting user by id'));
+			var userId = {"userId":id};
+            return $http.post("http://localhost:3000/findUserById",userId).then(handleSuccess, handleError('Error getting user by id'));
         }
 
         function GetByUsername(username) {
-            return $http.get('/api/users/' + username).then(handleSuccess, handleError('Error getting user by username'));
+            return $http.post('/api/users/' + username).then(handleSuccess, handleError('Error getting user by username'));
         }
 
         function Create(user) {

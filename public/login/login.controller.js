@@ -10,21 +10,19 @@
 		
 
         var vm = this;
-		var loginURL = "http://localhost:3000/findUserById";
-		$rootScope.isClinic = false;
-		$rootScope.isGuest = false;
-        vm.login = login;
+	    vm.login = login;
 
-        /*(function initController() {
+        (function initController() {
             // reset login status
 			$rootScope.isClinic = false;
+			$rootScope.isGuest = false;
             AuthenticationService.ClearCredentials();
-        })();*/
+        })();
 		
         function login() {
             vm.dataLoading = true;
-			var userId = {"userId":vm.username};
-			$http.post(loginURL, userId).then(
+			
+		/*	$http.post(loginURL, userId).then(
             function(response){
                 if (response.statusText == "OK" && response.data) {
 					
@@ -44,29 +42,21 @@
 					FlashService.Error("Invalid Username and Password");
 					vm.dataLoading = false;
 				}
-            });
+            }); */
 			
-           /* AuthenticationService.Login(vm.username, vm.password, function (response) {
+            AuthenticationService.Login(vm.username, vm.password, function (response) {
                 if (response.success) {
-                    AuthenticationService.SetCredentials(vm.username, vm.password);
-                    $location.path('/');
+                    AuthenticationService.SetCredentials(vm.username, vm.password,response.data,false);
+					$rootScope.loggedIn = true;
+					$rootScope.userName = response.data.name;
+                    $location.path('/home');
                 } else {
                     FlashService.Error(response.message);
                     vm.dataLoading = false;
                 }
-            }); */
+            }); 
         };
-		
-		var isClinicAdmin = function(){
-			if (vm.username == "S1234567E"){
-				$location.path('/listPatient');
-				$rootScope.isClinic = true;
-				$rootScope.clinicId = "5ac1f085060125dfe7296653"; //hard-code for testing purpose
-			}
-			else{
-				$location.path('/home');
-			}
-		}
+	
     }
 
 })();

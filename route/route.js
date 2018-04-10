@@ -14,7 +14,7 @@ module.exports = function(app){
 	app.route('/updateUser')
 	.post(accountController.update_userinfo);
 	
-	app.route('/book')
+	app.route('/createBooking')
 	.post(bookingController.createNewBooking);
 	
 	app.route('/findBookingByClinicId')

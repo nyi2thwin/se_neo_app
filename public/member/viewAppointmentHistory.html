@@ -9,21 +9,16 @@
 			<div class="col-md-5 listing-block" ng-hide="hideSearchResult">
 				<div class="media">
 					<div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i></div>
-					<div class="media-body pl-3" ng-repeat="booking in bookings">
-						<div class="name"><small>{{booking.name}}</small></div>
+					<div class="media-body pl-3" ng-repeat="booking in mdata.bookings">
+						<div class="name"><small>{{booking.clinicName}}</small></div>
 						<div class="stats">
-							<span><i class="fa fa-arrows-alt"></i>Operating Hr:</span>
-							<span><i class="fa fa-bath"></i>{{booking.startTime}}</span>
-							<span><i class="fa fa-bath"></i>to</span>
-							<span><i class="fa fa-bath"></i>{{booking.endTime}}</span>
+							<span><i class="fa fa-arrows-alt"></i>Visited on :</span>
+							<span><i class="fa fa-bath"></i>{{booking.dateTime}}</span>
 						</div>
-						<div class="address">{{booking.address}} </div>
-						<button type="submit" ng-Click="vm.viewDetail(clinic);" class="btn btn-primary">View Detail</button>
+						<button type="submit" ng-Click="vm.viewDetail(clinic);" class="btn btn-primary">Book</button>
 					</div>
 				</div>
-		   
-			</div>
-			
+		   </div>
 		</div>
 	</div>
 </section>
