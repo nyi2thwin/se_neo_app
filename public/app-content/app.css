@@ -48,6 +48,9 @@ a, a:hover, a:focus {
     margin: 40px 0;
 }
 
+.md-button {
+    text-transform: capitalize !important;/*For Lower case use lowercase*/
+}
 
 /* ---------------------------------------------------
     SIDEBAR STYLE
