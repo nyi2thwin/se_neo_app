@@ -5,8 +5,8 @@
         .module('app')
         .controller('homeController', homeController);
 	
-	homeController.$inject = ['$scope','$http','$rootScope','FlashService','$q','$filter','BookingService'];
-    function homeController($scope, $http,$rootScope,FlashService,$q,$filter,BookingService) {
+	homeController.$inject = ['$scope','$rootScope','FlashService','BookingService','ClinicService'];
+    function homeController($scope,$rootScope,FlashService,BookingService,ClinicService) {
 		var vm = this;
 		vm.dataLoading = false;
 		
@@ -17,13 +17,10 @@
 		$scope.firstRate = 0;
 		$scope.newComment = "";
 		$scope.mdata ={};
+		$scope.markers = []; 
 		$scope.clinicList = {};
 		
-		
-		var addReviewURL = "http://localhost:3000/addReview";
-		var viewClinicDetailURL = "http://localhost:3000/findClinicById";
-	
-		
+				
 		var loggedIn = $rootScope.globals.currentUser;
 		if(!loggedIn){
 			$rootScope.isGuest = true;
@@ -32,48 +29,48 @@
 			$rootScope.isGuest = false;
 		}
 		
-	
 		vm.search = function() {
-            vm.dataLoading = true;
-			var findNearByClinicURL = "http://localhost:3000/getNearByClinic/"+$scope.postalCode;
-            $http.get(findNearByClinicURL).then(
-            function(response){
-                if (response.statusText == "OK") {
-                    $scope.clinicList = response.data;
-					vm.dataLoading = false;
-					$scope.hideSearchBox = false;
-					$scope.hideSearchResult = false;
-					$scope.hideDetailResult = true;
-					for (var i = 0; i < $scope.clinicList.length; i++){
-						createMarker($scope.clinicList[i]);
-					}
-				} else {
-					FlashService.Error(response.statusText);
-					vm.dataLoading = false;
-				}
-            });
-		
-        }
-		vm.viewDetail = function(clinic){
-			
+			var response;
 			vm.dataLoading = true;
-            var dataToSend = 
-			{
-				"clinicId":clinic._id,
-			};             
-            $http.post(viewClinicDetailURL, dataToSend).then(
-            function(response){
-                if (response.statusText == "OK") {
-					$scope.hideSearchResult = true;
-					$scope.hideDetailResult = false;
-					$scope.mdata.clinic = response.data;
+			ClinicService.GetNearByClinic($scope.postalCode)
+				.then(function (response) {
+					if (response !== null && response.success) {
+						$scope.clinicList = response.data;
+						
+						$scope.markers = []; //clear markers
+						
+						$scope.hideSearchBox = false;
+						$scope.hideSearchResult = false;
+						$scope.hideDetailResult = true;
+						for (var i = 0; i < $scope.clinicList.length; i++){
+							createMarker($scope.clinicList[i]);
+						}
+						
+					} else {
+						FlashService.Error(response.message);
+					}
 					vm.dataLoading = false;
-				} else {
-					FlashService.Error(response.statusText);
+			});
+        }
+		
+		vm.viewDetail = function(clinicId) {
+			var response;
+			vm.dataLoading = true;
+			ClinicService.FindClinicById(clinicId)
+				.then(function (response) {
+					if (response !== null && response.success) {
+						$scope.clinicList = response.data;
+						
+						$scope.hideSearchResult = true;
+						$scope.hideDetailResult = false;
+						$scope.mdata.clinic = response.data;
+					} else {
+						FlashService.Error(response.message);
+					}
 					vm.dataLoading = false;
-				}
-            });
-		}
+			});
+        }
+		
 		vm.backToResult = function(){
 			$scope.hideSearchResult = false;
 			$scope.hideDetailResult = true;
@@ -104,7 +101,6 @@
 		}
 
 		vm.submitReview = function(){
-			var deferred = $q.defer();
             vm.dataLoading = true;
             var dataToSend = 
 			{
@@ -114,39 +110,36 @@
 				"username":loggedIn.name,
 				"rating":$scope.firstRate,
 				"datetime":new Date()
-			};          
+			};   
 			
-            $http.post(addReviewURL, dataToSend).then(
-            function(response){
-                if (response.statusText == "OK") {
-                   $scope.mdata.clinic.reviews.push(response.data);
-					vm.cancelReview();
+			ClinicService.AddReview(dataToSend)
+				.then(function (response) {
+					if (response !== null && response.success) {
+						$scope.mdata.clinic.reviews.push(response.data);
+						vm.cancelReview();
+					} else {
+						FlashService.Error(response.message);
+					}
 					vm.dataLoading = false;
-					deferred.resolve(response);
-				} else {
-					vm.dataLoading = false;
-					deferred.reject(response);
-				}
-            },
-			function (response) {
-				FlashService.Error(response.statusText);
-				deferred.reject(response);
 			});
 			
-			return deferred.promise;
 		}
+		
+		/********************* Map Section ***********************************/
 				
 		var mapOptions = {
                   zoom: 13,
                   center: new google.maps.LatLng(1.290270,103.851959),
                   mapTypeId: google.maps.MapTypeId.TERRAIN
         }
-
 		$scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-		$scope.markers = [];
 	  
 		var infoWindow = new google.maps.InfoWindow();
+		$scope.openInfoWindow = function(e, selectedMarker){
+			e.preventDefault();
+			google.maps.event.trigger(selectedMarker, 'click');
+		}
 		
 		var createMarker = function (clinic){
                   
@@ -166,10 +159,7 @@
                   
         }  
 		
-		$scope.openInfoWindow = function(e, selectedMarker){
-			e.preventDefault();
-			google.maps.event.trigger(selectedMarker, 'click');
-		}
+		
 
 	
 	
