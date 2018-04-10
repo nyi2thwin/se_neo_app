@@ -27,7 +27,7 @@
 			{
 				"userId":vm.user.nric,
 				"email":vm.user.email,
-				"name":vm.user.lastName,
+				"name":vm.user.name,
 				"contact":vm.user.contact,
 				"dob":vm.user.dob,
 				"password":vm.user.password

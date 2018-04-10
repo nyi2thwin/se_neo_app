@@ -1,19 +1,13 @@
 ﻿<div class="col-md-6 col-md-offset-3">
     <h2>Register</h2>
     <form name="form" ng-submit="vm.register()" role="form">
-        <div class="form-group" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
+        <div class="form-group" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
             <label for="username">First name</label>
-            <input type="text" name="firstName" id="firstName" class="form-control" ng-model="vm.user.firstName" required />
-            <span ng-show="form.firstName.$dirty && form.firstName.$error.required" class="help-block">First name is required</span>
+            <input type="text" name="name" id="name" class="form-control" ng-model="vm.user.name" required />
+            <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block"> Name is required</span>
         </div>
 
-        <div class="form-group" ng-class="{ 'has-error': form.lastName.$dirty && form.lastName.$error.required }">
-            <label for="username">Last name</label>
-            <input type="text" name="lastName" id="Text1" class="form-control" ng-model="vm.user.lastName" required />
-            <span ng-show="form.lastName.$dirty && form.lastName.$error.required" class="help-block">Last name is required</span>
-        </div>
-
-        <div class="form-group" ng-class="{ 'has-error': form.nric.$dirty && form.nric.$error.required }">
+         <div class="form-group" ng-class="{ 'has-error': form.nric.$dirty && form.nric.$error.required }">
             <label for="nric">NRIC</label>
             <input type="text" name="nric" id="nric" class="form-control" ng-model="vm.user.nric" required />
             <span ng-show="form.nric.$dirty && form.nric.$error.required" class="help-block">NRIC is required</span>
@@ -27,8 +21,9 @@
 
 		    <div class="form-group" ng-class="{ 'has-error': form.contact.$dirty && form.contact.$error.required }">
             <label for="contact">Contact</label>
-            <input type="text" name="contact" id="contact" class="form-control" ng-model="vm.user.contact" required />
+            <input type="text" name="contact" id="contact" class="form-control" ng-model="vm.user.contact" ng-pattern="" required />
             <span ng-show="form.contact.$dirty && form.contact.$error.required" class="help-block">Contact is required</span>
+                <span ng-show="form.$vaid" class="help-block">Contact is required</span>
         </div>
 
         <div class="form-group" ng-class="{ 'has-error': form.dob.$dirty && form.dob.$error.required }">
