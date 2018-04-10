@@ -93,21 +93,28 @@
 	<!-- Google Map API -->
 	<script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>
 
+    
     <script src="app.js"></script>
     <script src="app-services/authentication.service.js"></script>
     <script src="app-services/flash.service.js"></script>
 	<script src="app-services/jk-rating-stars.min.js"></script>
-    <script src="app-services/user.service.js"></script>
-	<script src="app-services/booking.service.js"></script>
-
-    <script src="clinic/patientListController.js"></script>
-	<script src="clinic/viewMyClinicInfoController.js"></script>
-	<script src="clinic/viewMyClinicReviewsController.js"></script>
-    <script src="login/login.controller.js"></script>
-    <script src="clinic/admin.controller.js"></script>
-    <script src="register/register.controller.js"></script>
-	<script src="home/homeController.js"></script>
-	<script src="member/viewMyInfoController.js"></script>
-	<script src="member/viewAppointmentHistoryController.js"></script>
+	
+	<!-- import Model's Services -->
+    <script src="model-services/user.service.js"></script>
+	<script src="model-services/booking.service.js"></script>
+	<script src="model-services/clinic.service.js"></script>
+	
+	<!--import Clinic Views' Controller  -->
+    <script src="clinic-view-controllers/patientListController.js"></script>
+	<script src="clinic-view-controllers/viewMyClinicInfoController.js"></script>
+	<script src="clinic-view-controllers/viewMyClinicReviewsController.js"></script>
+    <script src="clinic-view-controllers/admin.controller.js"></script>
+	
+	<!--import Member Views' Controller  -->
+	<script src="member-view-controllers/login.controller.js"></script>
+    <script src="member-view-controllers/register.controller.js"></script>
+	<script src="member-view-controllers/homeController.js"></script>
+	<script src="member-view-controllers/viewMyInfoController.js"></script>
+	<script src="member-view-controllers/viewAppointmentHistoryController.js"></script>
 </body>
 </html>

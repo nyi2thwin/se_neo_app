@@ -9,48 +9,49 @@
     config.$inject = ['$routeProvider', '$locationProvider'];
     function config($routeProvider, $locationProvider) {
         $routeProvider
+			.when('/admin', {
+                controller: 'AdminController',
+                templateUrl: 'clinic-views/admin.view.html',
+                controllerAs: 'vm'
+            })
             .when('/listPatient', {
                 controller: 'patientListController',
-                templateUrl: 'clinic/patientList.html',
+                templateUrl: 'clinic-views/patientList.html',
                 controllerAs: 'vm'
             })
             .when('/viewMyClinicInfo', {
                 controller: 'viewMyClinicInfoController',
-                templateUrl: 'clinic/viewMyClinicInfo.html',
+                templateUrl: 'clinic-views/viewMyClinicInfo.html',
                 controllerAs: 'vm'
             })
             .when('/viewMyClinicReviews', {
                 controller: 'viewMyClinicReviewsController',
-                templateUrl: 'clinic/viewMyClinicReviews.html',
+                templateUrl: 'clinic-views/viewMyClinicReviews.html',
                 controllerAs: 'vm'
             })
             .when('/login', {
                 controller: 'LoginController',
-                templateUrl: 'login/login.view.html',
+                templateUrl: 'member-views/login.view.html',
                 controllerAs: 'vm'
             })
             .when('/register', {
                 controller: 'RegisterController',
-                templateUrl: 'register/register.view.html',
+                templateUrl: 'member-views/register.view.html',
                 controllerAs: 'vm'
             })
             .when('/home', {
                 controller: 'homeController',
-                templateUrl: 'home/home.html',
+                templateUrl: 'member-views/home.html',
                 controllerAs: 'vm'
             })
             .when('/viewMyInfo', {
                 controller: 'viewMyInfoController',
-                templateUrl: 'member/viewMyInfo.html',
+                templateUrl: 'member-views/viewMyInfo.html',
                 controllerAs: 'vm'
             })
             .when('/viewHistory', {
                 controller: 'viewAppointmentHistoryController',
-                templateUrl: 'member/viewAppointmentHistory.html',
-                controllerAs: 'vm'
-            }).when('/admin', {
-                controller: 'AdminController',
-                templateUrl: 'clinic/admin.view.html',
+                templateUrl: 'member-views/viewAppointmentHistory.html',
                 controllerAs: 'vm'
             })
 

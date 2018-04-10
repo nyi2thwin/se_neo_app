@@ -1,0 +1,41 @@
+﻿<div>
+    <h2>My Clinic Info</h2>
+	<button type="submit" class="btn btn-primary" ng-disabled="!disableForm"  ng-click ="enableFormEdit()">Edit</button>
+    <form name="form" ng-submit="edit()" role="form">
+        <div class="form-group" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
+            <label for="name">Clinic Name</label>
+            <input type="text" name="name" id="name" class="form-control" ng-disabled="disableForm"  ng-model="mdata.name" required />
+            <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Clinic name is required</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.address.$dirty && form.address.$error.required }">
+            <label for="address">Address</label>
+            <input type="text" name="address" id="Text1" class="form-control" ng-disabled="disableForm"  ng-model="mdata.address" required />
+            <span ng-show="form.address.$dirty && form.address.$error.required" class="help-block">Address is required</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.postalCode.$dirty && form.postalCode.$error.required }">
+            <label for="postalCode">Postal Code</label>
+            <input type="text" name="postalCode" id="postalCode" class="form-control" ng-disabled="disableForm"  ng-model="mdata.postalCode" required />
+            <span ng-show="form.postalCode.$dirty && form.postalCode.$error.required" class="help-block">Postal Code is required</span>
+        </div>
+		<div class="form-group" ng-class="{ 'has-error': form.doctors.$dirty && form.doctors.$error.required }">
+            <label for="doctors">Doctors</label>
+            <input type="text" name="doctors" id="doctors" class="form-control" ng-disabled="disableForm"  ng-model="mdata.doctors" required />
+            <span ng-show="form.doctors.$dirty && form.doctors.$error.required" class="help-block">Please enter doctors.</span>
+        </div>
+		<div class="form-group" ng-class="{ 'has-error': form.startTime.$dirty && form.startTime.$error.required }">
+            <label for="startTime">Start Time</label>
+            <input type="text" name="startTime" id="startTime" class="form-control" ng-disabled="disableForm"  ng-model="mdata.startTime" required />
+            <span ng-show="form.startTime.$dirty && form.startTime.$error.required" class="help-block">Start Time is required</span>
+        </div>
+		 <div class="form-group" ng-class="{ 'has-error': form.endTime.$dirty && form.endTime.$error.required }">
+            <label for="endTime">End Time</label>
+            <input type="text" name="endTime" id="endTime" class="form-control" ng-disabled="disableForm"  ng-model="mdata.endTime" required />
+            <span ng-show="form.endTime.$dirty && form.endTime.$error.required" class="help-block">End Time is required</span>
+        </div>
+        <div class="form-actions" ng-disabled="disableForm"  ng-hide ="disableForm" align="right">
+            <md-button ng-click ="cancelFormEditing()" md-no-ink class="md-primary">Cancel</md-button>
+            <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <md-button type="submit" ng-disabled="form.$invalid || vm.dataLoading" ng-click ="updateMyClinicInfo()" class="md-raised md-primary">Submit</md-button>
+        </div>
+    </form>
+</div>
