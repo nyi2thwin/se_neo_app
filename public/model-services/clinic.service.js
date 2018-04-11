@@ -11,20 +11,25 @@
 	
         service.GetNearByClinic = GetNearByClinic;
 		service.FindClinicById = FindClinicById;
+		service.Update = Update;
+		
 	    return service;
 		
 		function GetNearByClinic(postalCode) {
 			return $http.get("http://localhost:3000/getNearByClinic/" + postalCode).then(handleSuccess, handleError('Error getting nearby clinics'));
 		}
 
-		function FindClinicById(clinicId) {
+		function FindClinicById(clinicId) { 
 			 var dataToSend = 
 			{
 				"clinicId":clinicId,
 			};
 			return $http.post("http://localhost:3000/findClinicById", dataToSend).then(handleSuccess, handleError('Error finding clinic by Id'));
 		}
-				
+		function Update(clinic) {
+			return $http.post("http://localhost:3000/updateClinic", clinic).then(handleSuccess, handleError('Error updating clinic info'));
+		}
+		
 		//Private Methods
 	    function handleSuccess(res) {
             return { success: true, data: res.data };

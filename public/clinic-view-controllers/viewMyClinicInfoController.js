@@ -5,36 +5,29 @@
         .module('app')
         .controller('viewMyClinicInfoController', viewMyClinicInfoController);
 
-    viewMyClinicInfoController.$inject = ['$scope', '$http', '$filter', '$location','$rootScope','FlashService'];
-    function viewMyClinicInfoController($scope, $http, $filter, $location,$rootScope,FlashService) {
+    viewMyClinicInfoController.$inject = ['$scope', '$location','$rootScope','FlashService','Clinic'];
+    function viewMyClinicInfoController($scope, $location,$rootScope,FlashService, Clinic) {
 		 var vm = this;
-		 var findClinicByClinicIdURL = "http://localhost:3000/findClinicById";
-		 var updateMyClinicInfoURL = "http://localhost:3000/updateClinic";
-		 $scope.mdata = {};
-		 var dataBeforeUpdate = {};
-		 $scope.disableForm = true;
 		 vm.dataLoading = false;
+		 $scope.mdata = {};
+		 $scope.disableForm = true;
+		 
+		 var dataBeforeUpdate = {};
+		 
 		 var init = function(){
             
-            var dataToSend = 
-			{
-				"clinicId":$rootScope.globals.currentUser.id,
-			};             
-            $http.post(findClinicByClinicIdURL, dataToSend).then(
-            function(response){
-                if (response.statusText == "OK") {
-                    $scope.mdata = response.data;
-					dataBeforeUpdate = angular.copy($scope.mdata);
-				} else {
-					FlashService.Error(response.statusText);
+			vm.dataLoading = true;
+			Clinic.FindClinicById($rootScope.globals.currentUser.id)
+				.then(function (response) {
+					if (response !== null && response.success) {
+						$scope.mdata = response.data;
+						dataBeforeUpdate = angular.copy($scope.mdata);
+					} else {
+						FlashService.Error(response.message);
+					}
 					vm.dataLoading = false;
-				}
-            },
-			function (response) {
-				vm.dataLoading = false;
-				FlashService.Error("Error Connection Refused");
 			});
-		}
+        }
 		
 		$scope.enableFormEdit = function(){
 			$scope.disableForm = false;
@@ -47,24 +40,22 @@
 			var dataToSend = $scope.mdata;
 			delete dataToSend.reviews;
 			vm.dataLoading = true;
-			$http.post(updateMyClinicInfoURL, dataToSend).then(
-            function(response){
-                if (response.statusText == "OK") {
-                    $scope.mdata = response.data;
-					$scope.disableForm = true;
-					$rootScope.userName = response.data.name;
-					FlashService.Success('Update successful', false);
+	
+			Clinic.Update(dataToSend)
+				.then(function (response) {
+					if (response !== null && response.success) {
+						$scope.mdata = response.data;
+						$scope.disableForm = true;
+						$rootScope.userName = response.data.name;
+						dataBeforeUpdate = angular.copy($scope.mdata);
+						
+						FlashService.Success('Update successful', false);
+					} else {
+						FlashService.Error(response.message);
+					}
 					vm.dataLoading = false;
-					dataBeforeUpdate = angular.copy($scope.mdata);
-				} else {
-					FlashService.Error(response.statusText);
-					vm.dataLoading = false;
-				}
-            },
-			function (response) {                          
-				FlashService.Error(response.statusText);
-				vm.dataLoading = false;
 			});
+
 		}
 		init();
 		

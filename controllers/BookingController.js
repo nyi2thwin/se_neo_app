@@ -60,7 +60,7 @@ exports.sendNotification = function(req, res) {
 	Booking.findOne({_id:req.body.bookingId}, function(err,booking) {
 		if(err)
 			res.send(err);
-		User.findOne({userId:booking.userId}, function(err,user) {
+		User.findOne({_id:booking.userId}, function(err,user) {
 			if(err)
 					res.send(err);
 				var toContact = "+65"+user.contact;
