@@ -30,7 +30,6 @@
 		}
 		
 		vm.search = function() {
-			var response;
 			vm.dataLoading = true;
 			Clinic.GetNearByClinic($scope.postalCode)
 				.then(function (response) {
@@ -54,7 +53,6 @@
         }
 		
 		vm.viewDetail = function(clinicId) {
-			var response;
 			vm.dataLoading = true;
 			Clinic.FindClinicById(clinicId)
 				.then(function (response) {

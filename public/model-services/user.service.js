@@ -11,6 +11,7 @@
 
         service.GetByNric = GetByNric;
         service.Create = Create;
+		service.Update = Update;
      
 
         return service;
@@ -23,8 +24,12 @@
         function Create(user) {
             return $http.post("http://localhost:3000/register", user).then(handleSuccess, handleError('Error creating user'));
         }
+		
+		function Update(user) {
+            return $http.post("http://localhost:3000/updateUser", user).then(handleSuccess, handleError('Error updating user'));
+        }
 
-        // private functions
+        // private functions 
 
         function handleSuccess(res) {
             return res.data;
