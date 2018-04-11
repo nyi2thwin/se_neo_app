@@ -52,6 +52,39 @@ a, a:hover, a:focus {
     text-transform: capitalize !important;/*For Lower case use lowercase*/
 }
 
+.md-button.logout {
+    float: right;
+}
+
+.docs-navbar-header {
+    position: absolute;
+    top: 10px;
+    right: 0px;
+    width: 100%;
+}
+.div.navbar-footer {
+    display:inline;
+    float: right;
+}
+
+.container-fluid {
+
+}
+
+.site-content-toolbar {
+    background: #f6f6f6 !important;
+    color: #202020 !important;
+    z-index: 3;
+    box-sizing: border-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    position: relative;
+    font-size: 20px;
+    min-height: 64px;
+    width: 100%;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.4;
+}
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */

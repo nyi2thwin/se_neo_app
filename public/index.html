@@ -51,26 +51,27 @@
 		</nav>
 
 		<!-- Page Content Holder -->
+
+
 		<div id="content">
-
-			<nav class="navbar navbar-default" ng-show="loggedIn">
+			<nav class="docs-navbar-header" ng-show="loggedIn">
 				<div class="container-fluid">
-
 					<div class="navbar-header">
-						<button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+						<md-button ng-click="sidebarCollapse()" class="md-raised md-primary">
 							<i class="glyphicon glyphicon-align-left"></i>
 							<span>Sidebar</span>
-						</button>
-
-						<md-button type="submit" ng-click="logout();" ng-show="loggedIn" class="md-raised md-warn md-hue-2">Logout</md-button>
+						</md-button>
 					</div>
 
+					<div class="navbar-footer">
+						<md-button type="submit" ng-click="logout();" ng-show="loggedIn" class="md-raised md-warn md-hue-2 logout">Logout</md-button>
+					</div>
 				</div>
 			</nav>
-			<div>
+			<div style="top: auto">
 				<div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
-
 			</div>
+
 			<div ng-view style="height:100%"></div>
 		</div>
 

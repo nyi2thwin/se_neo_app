@@ -72,17 +72,17 @@
             $rootScope.isClinic = $rootScope.globals.currentUser.isClinic;
             $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
         }
-        
+
         var init = function(){
-                 $('#sidebarCollapse').on('click', function () {
-                    $('#sidebar, #content').toggleClass('active');
-                    $('.collapse.in').toggleClass('in');
-                    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-                });
-                
-                
+
         };
-        
+
+        $rootScope.sidebarCollapse = function() {
+            $('#sidebar, #content').toggleClass('active');
+            $('.collapse.in').toggleClass('in');
+            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+        }
+
         $rootScope.logout = function(){
             $rootScope.globals = {};
             $rootScope.userName = "";
