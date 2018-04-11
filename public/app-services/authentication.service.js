@@ -5,11 +5,12 @@
         .module('app')
         .factory('AuthenticationService', AuthenticationService);
 
-    AuthenticationService.$inject = ['$http', '$cookies', '$rootScope', '$timeout', 'User'];
-    function AuthenticationService($http, $cookies, $rootScope, $timeout, User) {
+    AuthenticationService.$inject = ['$http', '$cookies', '$rootScope', '$timeout', 'User', 'Clinic'];
+    function AuthenticationService($http, $cookies, $rootScope, $timeout, User, Clinic) {
         var service = {};
 
         service.Login = Login;
+		service.ClinicLogin = ClinicLogin;
         service.SetCredentials = SetCredentials;
         service.ClearCredentials = ClearCredentials;
 
@@ -21,6 +22,20 @@
 				.then(function (user) {
 					if (user !== null && user.password === password) {
 						response = { success: true, data: user };
+					} else {
+						response = { success: false, message: 'Username or password is incorrect' };
+					}
+					callback(response);
+			});
+        }
+		
+		function ClinicLogin(clinicId, password, callback) {
+			var response;
+			Clinic.FindClinicById(clinicId)
+				.then(function (clinic) {
+					if (clinic !== null && clinic.data._id === clinicId && password == "123123123" ){
+						
+						response = { success: true, data: clinic.data };
 					} else {
 						response = { success: false, message: 'Username or password is incorrect' };
 					}
