@@ -1,25 +1,63 @@
-﻿<div>
-    <h2 style= "display:inline">Appointment History</h2>
-	
-</div>
+﻿<!--
 <div class="clearfix"></div>
-<section class="search-box">
+<div>
     <div class="container-fluid" style="height:100%"> 
 		<div class="row" style="height:100%">
-			<div class="col-md-5 listing-block" ng-hide="hideSearchResult">
-				<div class="media">
+			<div class="col-md-5 listing-block" ng-hide="hideSearchResult"> 
+				<div class="media" style="overflow:scroll">
 					<div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i></div>
 					<div class="media-body pl-3" ng-repeat="booking in mdata.bookings">
-						<div class="name"><small>{{booking.clinicName}}</small></div>
+						<div class="name"><small>{{booking.clinic.name}}</small></div>
 						<div class="stats">
 							<span><i class="fa fa-arrows-alt"></i>Visited on :</span>
 							<span><i class="fa fa-bath"></i>{{booking.dateTime}}</span>
+							
 						</div>
-
-						<md-button type="submit" ng-Click="vm.viewDetail(clinic);" class="md-raised md-primary">Book</md-button>
+						<md-button type="submit" ng-Click="vm.book(booking.clinic);" class="md-raised md-primary">Book</md-button>
+						
 					</div>
 				</div>
-		   </div>
+		  </div> 
 		</div>
 	</div>
-</section>
+</div> -->
+
+<h3>Appointment History </h3>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+			  <th scope="col" class="text-center">Clinic Name</th>
+			  <th scope="col">Time</th>
+			  <th scope="col">Status</th>
+			  <th scope="col">My Qno</th>
+			</tr>
+		</thead>
+		<tbody>
+ 
+		  <tr ng-repeat="booking in mdata.bookings">
+			<td style="width:30%;" class="text-center" filter="{name:'text'}" sortable="'name'">
+				<strong>{{booking.clinic.name}}</strong>
+				<div class="stats">
+					<span><i class="fa fa-bath"></i>{{booking.clinic.address}}</span>
+					<span><i class="fa fa-bath"></i>{{mdata.clinic.postalCode}}</span>		
+				</div>
+			</td>
+			
+			<td style="width:15%;" class="text-left" filter="{dateTime:'text'}" sortable="'dateTime'">
+				{{booking.dateTime}}
+			</td>
+			<td style="width:10%;" class="text-left" filter="{status:'text'}" sortable="'status'">
+				{{booking.status}}
+			</td>
+			<td style="width:10%;" class="text-left" filter="{status:'text'}" sortable="'status'">
+				{{booking.queNo}}
+			</td>
+            <td>
+				<md-button type="submit" ng-Click="vm.book(booking.clinic);" class="md-raised md-primary">Book</md-button>
+				
+				<md-button type="submit" ng-click="vm.cancel(booking._id);"  ng-show="booking.status == 'waiting'" class="md-raised md-warn md-hue-2">Cancel</md-button>
+			</td>
+			      		
+		  </tr>
+		</tbody>
+	</table>

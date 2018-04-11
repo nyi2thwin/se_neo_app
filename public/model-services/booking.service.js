@@ -9,6 +9,7 @@
     function Booking($rootScope,$http,$filter) {
         var service = {};
 		var findBookingByClinicIdURL = "http://localhost:3000/findBookingByClinicId";
+		var findBookingByUserIdURL = "http://localhost:3000/findBookingByUserId";
 		var createBookingURL = "http://localhost:3000/createBooking";
 		var deleteBookingURL = "http://localhost:3000/deleteBooking";
 		var sendNotification = "http://localhost:3000/sendNotification";
@@ -17,8 +18,9 @@
 		service.Create = Create;
 		service.Delete = Delete;
 		service.Notify = Notify;
-		
+		service.FindBookingByUserId = FindBookingByUserId;
 		service.FindBookingByClinicId = FindBookingByClinicId;
+		
         return service;
 		
 		
@@ -79,6 +81,15 @@
             return $http.post(findBookingByClinicIdURL,dataToSend).then(handleSuccess, handleError('Error getting Booking by ClinicId'));
         }
 		
+		function FindBookingByUserId(userId) {
+			 var dataToSend = 
+			{
+				"userId":userId,
+			};    
+			
+            return $http.post(findBookingByUserIdURL,dataToSend).then(handleSuccess, handleError('Error getting Booking by UserId'));
+        }
+				
 		function Create(booking) {
 		    return $http.post(createBookingURL,booking).then(handleSuccess, handleError('Error creating Booking'));
         }

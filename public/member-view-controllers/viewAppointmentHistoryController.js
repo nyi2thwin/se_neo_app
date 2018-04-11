@@ -5,8 +5,8 @@
         .module('app')
         .controller('viewAppointmentHistoryController', viewAppointmentHistoryController);
 
-    viewAppointmentHistoryController.$inject = ['$scope', '$http', '$filter','$rootScope','FlashService'];
-    function viewAppointmentHistoryController($scope, $http, $filter, $location,$rootScope,FlashService) {
+    viewAppointmentHistoryController.$inject = ['$scope', '$rootScope', 'FlashService', 'Booking'];
+    function viewAppointmentHistoryController($scope, $rootScope, FlashService, Booking) {
 		 var vm = this;
 		 var findBookingByUserIdURL = "http://localhost:3000/findClinicById";
 		 var bookingURL = "";
@@ -17,48 +17,50 @@
 		 vm.dataLoading = false;
 
 		 var init = function(){
-            var dataToSend = 
-			{
-				"userId":$rootScope.globals.currentUser.username,
-			};             
-            $http.post(findBookingByUserIdURL, dataToSend).then(
-            function(response){
-                if (response.statusText == "OK" && response.data) {
-					if(response.data.length == 0){
-						FlashService.Error("You have no appointment history");
-					}
-                    $scope.mdata.bookings = response.data;
-				} else {
-					FlashService.Error(response.statusText);
-				}
-				vm.dataLoading = false;
-            },
-			function (response) {                          
-				FlashService.Error("Unable to Retrieve Appointment History!Please try again later");
-				vm.dataLoading = false;
-			});
-		}
-
-
-		$scope.book = function(){
-			var dataToSend = $scope.mdata;
 			vm.dataLoading = true;
-			$http.post(bookingURL, dataToSend).then(
-            function(response){
-                if (response.statusText == "OK") {
-                    $scope.mdata = response.data;
-					FlashService.Success('Update successful', true);
-				} else {
-					FlashService.Error(response.statusText);
+			Booking.FindBookingByUserId($rootScope.globals.currentUser.id)
+				.then(function (response) {
+					if (response !== null && response.success) {
+						if(response.data.length == 0){
+							FlashService.Error("You have no appointment history");
+						}
+						$scope.mdata.bookings = response.data;
+					} else {
+						FlashService.Error(response.message);
+					}
 					vm.dataLoading = false;
-				}
-            },
-			function (response) {                          
-				FlashService.Error(response.statusText);
+			});
+		
+		}
+
+		vm.book = function(clinic){
+			vm.dataLoading = true;
+			Booking.MakeAppointment($rootScope.globals.currentUser.id,clinic._id, function (response) {
+                if (response != null & response.success) {
+                    FlashService.Success(response.message,false);
+					init();
+                } else {
+                    FlashService.Error(response.message);
+                }
 				vm.dataLoading = false;
+            }); 
+		}
+		
+		vm.cancel = function(bookingId){
+			vm.dataLoading = true;
+			Booking.Delete(bookingId)
+				.then(function (response) {
+					if (response !== null && response.success) {
+							
+						FlashService.Success(response.data.message);
+						init();
+					} else {
+						FlashService.Error(response.message);
+					}
+					vm.dataLoading = false;
 			});
 		}
-		//init();
+		init();
 		
     }
 
