@@ -38,6 +38,11 @@
             <input type="password" name="password" id="password" class="form-control" ng-model="vm.user.password" required />
             <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
         </div>
+		<div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+            <label for="password">Confirm Password</label>
+            <input type="password" name="cpassword" id="cpassword" class="form-control" ng-model="vm.user.cpassword" required />
+            <span ng-show="(vm.user.password!='' && vm.user.cpassword!='') && (vm.user.password != vm.user.cpassword)" class="help-block">Passwords do not match!</span>
+        </div>
 
         <div class="form-actions" align="right">
             <md-button md-no-ink ng-href="#!/login" class="md-primary">Cancel</md-button>

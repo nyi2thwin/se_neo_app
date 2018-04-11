@@ -17,7 +17,7 @@
 
         function Login(username, password, callback) {
 			var response;
-			UserService.GetById(username)
+			UserService.GetByNric(username)
 				.then(function (user) {
 					if (user !== null && user.password === password) {
 						response = { success: true, data: user };

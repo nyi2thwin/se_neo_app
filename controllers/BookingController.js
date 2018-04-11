@@ -1,6 +1,7 @@
 'use strict';
 var mongoose = require('mongoose'),
 	Booking = mongoose.model('Booking'),
+	Clinic = mongoose.model('Clinic'),
 	User = mongoose.model('User'),
 	request = require('request');
 
@@ -10,6 +11,27 @@ exports.findBookingByClinicId = function(req,res){
 		if(err)
 			res.send(err);
 		res.json(booking);
+	});
+};
+
+exports.findBookingByUserId = function(req,res){
+	Booking.find({userId:req.body.userId}, function(err,bookings) {
+		if(err)
+			res.send(err);
+		
+		var results =[];
+		bookings.map(booking => {
+            Clinic.findOne({_id:booking.clinicId}, function(err,clinic) {
+				if(err)
+					return res.send(err);
+				var result = booking.toJSON();
+				result['clinic'] = clinic;
+				results.push(result);
+				
+			});
+        })
+		
+		res.json(results);
 	});
 };
 

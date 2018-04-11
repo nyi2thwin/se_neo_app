@@ -4,7 +4,15 @@ var mongoose = require('mongoose'),
 
 
 exports.findUserById = function(req,res){
-	User.findOne({userId:req.body.userId}, function(err,user) {
+	User.findOne({_id:req.body.userId}, function(err,user) {
+		if(err)
+			res.send(err);
+		res.json(user);
+	});
+};
+
+exports.findUserByNric = function(req,res){
+	User.findOne({nric:req.body.nric}, function(err,user) {
 		if(err)
 			res.send(err);
 		res.json(user);

@@ -10,7 +10,7 @@
         var service = {};
 
         service.GetAll = GetAll;
-        service.GetById = GetById;
+        service.GetByNric = GetByNric;
         service.GetByUsername = GetByUsername;
         service.Create = Create;
         service.Update = Update;
@@ -22,9 +22,9 @@
             return $http.get('/api/users').then(handleSuccess, handleError('Error getting all users'));
         }
 
-        function GetById(id) {
-			var userId = {"userId":id};
-            return $http.post("http://localhost:3000/findUserById",userId).then(handleSuccess, handleError('Error getting user by id'));
+        function GetByNric(nric) {
+			var nric = {"nric":nric};
+            return $http.post("http://localhost:3000/findUserByNric",nric).then(handleSuccess, handleError('Error getting user by id'));
         }
 
         function GetByUsername(username) {

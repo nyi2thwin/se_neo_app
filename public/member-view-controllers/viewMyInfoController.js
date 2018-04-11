@@ -8,7 +8,7 @@
     viewMyInfoController.$inject = ['$scope', '$http', '$filter', '$location','$rootScope','FlashService'];
     function viewMyInfoController($scope, $http, $filter, $location,$rootScope,FlashService) {
 		 var vm = this;
-		 var findUserByIdURL = "http://localhost:3000/findUserById";
+		 var findUserByIdURL = "http://localhost:3000/findUserByNric";
 		 var updateMyInfoURL = "http://localhost:3000/updateUser";
 		 $scope.mdata = {};
 		 var dataBeforeUpdate = {};

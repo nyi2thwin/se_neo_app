@@ -11,26 +11,32 @@
         var registerURL = "http://localhost:3000/register";
 
         vm.register = function(){
-	       	  	register().then(function (response) {
+				if(vm.user.password != vm.user.cpassword){
+					FlashService.Error("Please enter the Password");
+				}
+				else{
+					register().then(function (response) {
 					FlashService.Success('Registration successful', true);
-                    $location.path('/login');
-				},
-				function (response) {
-					FlashService.Error(response.statusText);
-					vm.dataLoading = false;
-				});
+					$location.path('/login');
+					},
+					function (response) {
+						FlashService.Error(response.statusText);
+						vm.dataLoading = false;
+					});
+				}
+	       	  	
 		};
         var register =function() {
 			var deferred = $q.defer();
             vm.dataLoading = true;
             var dataToSend =
 			{
-				"userId":vm.user.nric,
-				"email":vm.user.email,
-				"name":vm.user.name,
+				"nric":vm.user.nric.trim(),
+				"email":vm.user.email.trim(),
+				"name":vm.user.name.trim(),
 				"contact":vm.user.contact,
 				"dob":vm.user.dob,
-				"password":vm.user.password
+				"password":vm.user.password.trim()
 			};
           $http.post(registerURL, dataToSend).then(
 			function(response){

@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-	userId: {
+	nric: {
 		type:String,
 		required: 'Kindly enter NRIC'
 	},

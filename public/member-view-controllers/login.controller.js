@@ -22,29 +22,7 @@
         function login() {
             vm.dataLoading = true;
 			
-		/*	$http.post(loginURL, userId).then(
-            function(response){
-                if (response.statusText == "OK" && response.data) {
-					
-						if(response.data.password == vm.password){
-							AuthenticationService.SetCredentials(vm.username, vm.password,response.data,false);
-							$rootScope.loggedIn = true;
-							$rootScope.userName = response.data.name;
-							isClinicAdmin();
-						}
-						else{
-							$rootScope.loggedIn = false;
-							FlashService.Error("Invalid Password");
-							vm.dataLoading = false;
-						}
-                                          
-				} else {
-					FlashService.Error("Invalid Username and Password");
-					vm.dataLoading = false;
-				}
-            }); */
-			
-            AuthenticationService.Login(vm.username, vm.password, function (response) {
+			AuthenticationService.Login(vm.username, vm.password, function (response) {
                 if (response.success) {
                     AuthenticationService.SetCredentials(vm.username, vm.password,response.data,false);
 					$rootScope.loggedIn = true;

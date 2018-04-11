@@ -10,6 +10,9 @@ module.exports = function(app){
 	
 	app.route('/findUserById')
 	.post(accountController.findUserById);
+	
+	app.route('/findUserByNric')
+	.post(accountController.findUserByNric);
 		
 	app.route('/updateUser')
 	.post(accountController.update_userinfo);
@@ -19,7 +22,9 @@ module.exports = function(app){
 	
 	app.route('/findBookingByClinicId')
 	.post(bookingController.findBookingByClinicId);
-
+	
+	app.route('/findBookingByUserId')
+	.post(bookingController.findBookingByUserId);
 	
 	app.route('/deleteBooking')
 	.post(bookingController.deleteBooking);
