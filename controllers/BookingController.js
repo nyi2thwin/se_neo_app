@@ -20,18 +20,20 @@ exports.findBookingByUserId = function(req,res){
 			res.send(err);
 		
 		var results =[];
-		bookings.map(booking => {
-            Clinic.findOne({_id:booking.clinicId}, function(err,clinic) {
-				if(err)
-					return res.send(err);
-				var result = booking.toJSON();
-				result['clinic'] = clinic;
+		var promises = [];
+	    bookings.map(booking => {
+        	promises.push(Clinic.findOne({_id:booking.clinicId}).exec().then((clinic) => {
+		    	var result = booking.toJSON();
+				result['clinic'] = clinic.toJSON();
 				results.push(result);
+			}));
 				
-			});
-        })
+				
+		});
+		Promise.all(promises).then(function(result) {
+			res.json(results);
+		});
 		
-		res.json(results);
 	});
 };
 
