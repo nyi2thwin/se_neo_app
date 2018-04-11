@@ -15,9 +15,9 @@
 		 $scope.disableForm = true;
 		 vm.dataLoading = false;
 		 var init = function(){
-            var userId = {"userId":$rootScope.globals.currentUser.username};
+            var nric = {"nric":$rootScope.globals.currentUser.username};
                      
-            $http.post(findUserByIdURL, userId).then(
+            $http.post(findUserByIdURL, nric).then(
             function(response){
                 if (response.statusText == "OK") {
                     $scope.mdata = response.data;

@@ -8,9 +8,9 @@
             <input type="text" name="name" id="Text1" class="form-control" ng-disabled="disableForm" ng-model="mdata.name" required />
             <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Name is required</span>
         </div>
-        <div class="form-group" ng-class="{ 'has-error': form.userId.$dirty && form.userId.$error.required }">
-            <label for="userId">NRIC</label>
-            <input type="text" name="userId" id="userId" class="form-control" ng-disabled="true" ng-model="mdata.userId" required />
+        <div class="form-group" ng-class="{ 'has-error': form.nric.$dirty && form.nric.$error.required }">
+            <label for="nric">NRIC</label>
+            <input type="text" name="nric" id="nric" class="form-control" ng-disabled="true" ng-model="mdata.nric" required />
         </div>
 		<div class="form-group" ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }">
             <label for="email">Email</label>

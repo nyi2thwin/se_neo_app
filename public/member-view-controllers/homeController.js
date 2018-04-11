@@ -5,8 +5,8 @@
         .module('app')
         .controller('homeController', homeController);
 	
-	homeController.$inject = ['$scope','$rootScope','FlashService','BookingService','ClinicService'];
-    function homeController($scope,$rootScope,FlashService,BookingService,ClinicService) {
+	homeController.$inject = ['$scope','$rootScope','FlashService','Booking','Clinic','Review'];
+    function homeController($scope,$rootScope,FlashService,Booking,Clinic,Review) {
 		var vm = this;
 		vm.dataLoading = false;
 		
@@ -32,7 +32,7 @@
 		vm.search = function() {
 			var response;
 			vm.dataLoading = true;
-			ClinicService.GetNearByClinic($scope.postalCode)
+			Clinic.GetNearByClinic($scope.postalCode)
 				.then(function (response) {
 					if (response !== null && response.success) {
 						$scope.clinicList = response.data;
@@ -56,7 +56,7 @@
 		vm.viewDetail = function(clinicId) {
 			var response;
 			vm.dataLoading = true;
-			ClinicService.FindClinicById(clinicId)
+			Clinic.FindClinicById(clinicId)
 				.then(function (response) {
 					if (response !== null && response.success) {
 							
@@ -77,7 +77,7 @@
 
 		vm.makeAppoint = function(){
 			vm.dataLoading = true;
-			BookingService.MakeAppointment(loggedIn.id,$scope.mdata.clinic._id, function (response) {
+			Booking.MakeAppointment(loggedIn.id,$scope.mdata.clinic._id, function (response) {
                 if (response != null & response.success) {
                     FlashService.Success(response.message,false);
                 } else {
@@ -111,7 +111,7 @@
 				"datetime":new Date()
 			};   
 			
-			ClinicService.AddReview(dataToSend)
+			Review.AddReview(dataToSend)
 				.then(function (response) {
 					if (response !== null && response.success) {
 						$scope.mdata.clinic.reviews.push(response.data);

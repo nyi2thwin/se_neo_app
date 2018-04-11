@@ -3,10 +3,10 @@
 
     angular
         .module('app')
-        .factory('BookingService', BookingService);
+        .factory('Booking', Booking);
 
-    BookingService.$inject = ['$rootScope','$http','$filter'];
-    function BookingService($rootScope,$http,$filter) {
+    Booking.$inject = ['$rootScope','$http','$filter'];
+    function Booking($rootScope,$http,$filter) {
         var service = {};
 		var findBookingByClinicIdURL = "http://localhost:3000/findBookingByClinicId";
 		var createBookingURL = "http://localhost:3000/createBooking";
@@ -69,7 +69,7 @@
 				"clinicId":clinicId,  //$scope.mdata.clinic._id,
 			};    
 			
-            return $http.post(findBookingByClinicIdURL,dataToSend).then(handleSuccess, handleError('Error getting BookingService by ClinicId'));
+            return $http.post(findBookingByClinicIdURL,dataToSend).then(handleSuccess, handleError('Error getting Booking by ClinicId'));
         }
 		
 		function createBooking(booking) {
