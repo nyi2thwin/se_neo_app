@@ -3,7 +3,7 @@
 	<table class="table table-hover">
 		<thead>
 			<tr>
-			  <th scope="col">Patient NRIC</th>
+			  <th scope="col">id</th>
 			  <th scope="col">Name</th>
 			  <th scope="col">Queue No</th>
 			</tr>
@@ -26,8 +26,17 @@
 			</td>
 			
             <td>
-				<md-button type="button" ng-click="unqueue(patient._id)" class="md-raised">Unqueue</md-button>
-				<md-button type="button" ng-click="notify(patient._id)" class="md-raised">Notify</md-button>
+            	<div ng-if="patient.status == 'visited'">
+				    Visited
+				</div>
+				<div ng-if="patient.status != 'visited'">
+				    <md-button type="button" ng-click="unqueue(patient._id)" class="md-raised">Unqueue</md-button>
+					<md-button type="button" ng-click="notify(patient._id)" class="md-raised">Notify</md-button>
+					<md-button type="button" ng-click="mark_visit(patient._id)" class="md-raised">Mark Visited</md-button>
+				</div>
+
+				
+				
             </td>
       		
 		  </tr>

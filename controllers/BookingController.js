@@ -57,6 +57,15 @@ exports.deleteBooking = function(req, res) {
 	});
 };
 
+
+exports.markVisited = function(req, res) {
+	Booking.findOneAndUpdate({_id: req.body.bookingId}, {'status':'visited'}, function(err, booking) {
+    	if (err)
+			return res.send(err);
+		res.json({ message: 'Booking mark visited successfully!' });
+	});
+};
+
 exports.sendNotification = function(req, res) {
 	//send whatapp or telegram msg code here
 	Booking.findOne({_id:req.body.bookingId}, function(err,booking) {

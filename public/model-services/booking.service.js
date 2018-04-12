@@ -12,6 +12,7 @@
 		var findBookingByUserIdURL = "http://localhost:3000/findBookingByUserId";
 		var createBookingURL = "http://localhost:3000/createBooking";
 		var deleteBookingURL = "http://localhost:3000/deleteBooking";
+		var MarkVisitedURL = "http://localhost:3000/markVisited";
 		var sendNotification = "http://localhost:3000/sendNotification";
 
         service.MakeAppointment = MakeAppointment;
@@ -20,6 +21,7 @@
 		service.Notify = Notify;
 		service.FindBookingByUserId = FindBookingByUserId;
 		service.FindBookingByClinicId = FindBookingByClinicId;
+		service.MarkVisited = MarkVisited;
 		
         return service;
 		
@@ -97,6 +99,11 @@
 		function Delete(bookingId) {
 			var dataToSend = {"bookingId":bookingId};  
 		    return $http.post(deleteBookingURL,dataToSend).then(handleSuccess, handleError('Error deleting Booking'));
+        }
+
+        function MarkVisited(bookingId) {
+			var dataToSend = {"bookingId":bookingId};  
+		    return $http.post(MarkVisitedURL,dataToSend).then(handleSuccess, handleError('Error marking visisted'));
         }
 		
 		function Notify(bookingId) {

@@ -31,4 +31,8 @@ module.exports = function(app){
 
 	app.route('/sendNotification')
 	.post(bookingController.sendNotification);
+
+	app.route('/markVisited')
+	.post(bookingController.markVisited);
+	
 };
