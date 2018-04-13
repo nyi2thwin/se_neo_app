@@ -64,10 +64,14 @@ a, a:hover, a:focus {
     color: black;
 }
 
+.md-datepicker-input {
+    color: white;
+}
 .docs-navbar-header {
     position: absolute;
-    top: 10px;
+    top: 0px;
     right: 0px;
+
     width: 100%;
 }
 .div.navbar-footer {
@@ -75,6 +79,12 @@ a, a:hover, a:focus {
     float: right;
 }
 .container-fluid {
+    background-color: white;
+    box-shadow: 3px 3px 2px #595757;
+}
+
+.container-fluid .navbar-header.md-button{
+    vertical-align: center;
 }
 
 .site-content-toolbar {
