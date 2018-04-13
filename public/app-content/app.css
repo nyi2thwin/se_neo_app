@@ -52,8 +52,16 @@ a, a:hover, a:focus {
     text-transform: capitalize !important;/*For Lower case use lowercase*/
 }
 
+.md-button.md-primary {
+    color: white;
+}
+
 .md-button.logout {
     float: right;
+}
+
+.md-calendar tbody, .md-calendar td, .md-calendar tr {
+    color: black;
 }
 
 .docs-navbar-header {
