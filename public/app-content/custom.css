@@ -18,3 +18,13 @@
 .ng-scope{
 	color:white;
 }
+#map{
+	color:#606060;
+}
+.media-body {
+    padding: 5px;
+    color: #606060;
+    min-height:180px;
+    border:0px;
+    border-bottom:1px solid #bcbcbc;
+}

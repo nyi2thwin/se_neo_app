@@ -48,7 +48,7 @@ exports.listNearbyClinic = function(req, res) {
 		Clinic.find( { location : { $near : [result[0]['latitude'],result[0]['longitude']] } } ).limit(5).exec(function(err, results) {
    			if(err)
 				return res.send(err);
-			res.json(results);
+			res.json({clinics:results,lat:result[0]['latitude'],long:result[0]['longitude']});
 		});
 	});
 	
