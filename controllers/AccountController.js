@@ -62,7 +62,6 @@ exports.remove_user = function(req, res) {
 
 exports.resetPasswordByID = function(req,res){
 	var new_password = makeid();
-	console.log(new_password);
 	User.findOneAndUpdate({_id:req.body.userId},{password:new_password}, function(err,user) {
 		if(err)
 			res.send(err);
@@ -72,6 +71,7 @@ exports.resetPasswordByID = function(req,res){
 };
 
 exports.resetPasswordByEmail = function(req,res){
+	var new_password = makeid();
 	User.findOneAndUpdate({email:req.body.email},{password:new_password}, function(err,user) {
 		if(err)
 			res.send(err);
