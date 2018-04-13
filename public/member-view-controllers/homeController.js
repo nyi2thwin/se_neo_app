@@ -80,6 +80,7 @@
 							
 						$scope.hideSearchResult = true;
 						$scope.hideDetailResult = false;
+						$scope.map.setCenter(new google.maps.LatLng(response.data.location[0],response.data.location[1]));
 						$scope.mdata.clinic = response.data;
 					} else {
 						FlashService.Error(response.message);
