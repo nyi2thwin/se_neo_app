@@ -39,6 +39,13 @@
                 templateUrl: 'member-views/register.view.html',
                 controllerAs: 'vm'
             })
+
+            .when('/recover', {
+                controller: 'recoverController',
+                templateUrl: 'member-views/recover.view.html',
+                controllerAs: 'vm'
+            })
+
             .when('/home', {
                 controller: 'homeController',
                 templateUrl: 'member-views/home.html',
