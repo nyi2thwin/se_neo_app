@@ -37,5 +37,11 @@ module.exports = function(app){
 
 	app.route('/markVisited')
 	.post(bookingController.markVisited);
+
+	app.route('/resetPasswordByID')
+	.post(accountController.resetPasswordByID);
+
+	app.route('/resetPasswordByEmail')
+	.post(accountController.resetPasswordByEmail);
 	
 };
