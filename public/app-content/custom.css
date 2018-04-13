@@ -33,3 +33,15 @@
 	padding:0px;
 	border-left:1px solid #bcbcbc;
 }
+
+table,form{
+    background: rgba(0,0,0,0.4);
+    padding:20px;
+}
+
+.table-hover > tbody > tr:hover > td, .table-hover > tbody > tr:hover > th{
+    background:none;
+}
+.search-box{
+    width:100%;
+}
