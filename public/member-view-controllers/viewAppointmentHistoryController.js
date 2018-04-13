@@ -18,12 +18,24 @@
 
 		 var init = function(){
 			vm.dataLoading = true;
-			Booking.FindBookingByUserId($rootScope.globals.currentUser.id)
+		
+			Booking.FindUserCurrentAppointment($rootScope.globals.currentUser.id)
+			.then(function (response) {
+					if (response !== null && response.success && response.data != null) {
+							
+						$scope.mdata.currentBooking = response.data;
+						$scope.disableAppointment = true;
+					} else {
+						FlashService.Error(response.message);
+						$scope.disableAppointment = false;
+					}
+					vm.dataLoading = false;
+			});
+			
+		 
+			Booking.FindUserAppointHistory($rootScope.globals.currentUser.id)
 				.then(function (response) {
 					if (response !== null && response.success) {
-						if(response.data.length == 0){
-							FlashService.Error("You have no appointment history");
-						}
 						$scope.mdata.bookings = response.data;
 					} else {
 						FlashService.Error(response.message);
@@ -53,6 +65,7 @@
 					if (response !== null && response.success) {
 							
 						FlashService.Success(response.data.message);
+						$scope.disableAppointment = false;
 						init();
 					} else {
 						FlashService.Error(response.message);

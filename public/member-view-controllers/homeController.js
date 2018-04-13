@@ -9,7 +9,7 @@
     function homeController($scope,$rootScope,FlashService,Booking,Clinic,Review) {
 		var vm = this;
 		vm.dataLoading = false;
-		
+		$scope.disableAppointment = false;
 		$scope.hideSearchBox = true;
 		$scope.hideSearchResult = true;
 		$scope.hideDetailResult = true;
@@ -22,12 +22,31 @@
 		
 				
 		var loggedIn = $rootScope.globals.currentUser;
+		var init = function() {
+			Booking.FindUserCurrentAppointment(loggedIn.id)
+				.then(function (response) {
+						if (response !== null && response.success) {
+							if(response.data.length != 0){
+								$scope.disableAppointment = true;	
+							}else{
+								$scope.disableAppointment = false;
+							}
+						} else {
+							FlashService.Error(response.message);
+						}
+						vm.dataLoading = false;
+				});
+		}
+		
 		if(!loggedIn){
 			$rootScope.isGuest = true;
 		}
 		else{
 			$rootScope.isGuest = false;
+			init();
 		}
+		
+		
 		
 		vm.search = function() {
 			vm.dataLoading = true;
@@ -78,6 +97,7 @@
 			Booking.MakeAppointment(loggedIn.id,$scope.mdata.clinic._id, function (response) {
                 if (response != null & response.success) {
                     FlashService.Success(response.message,false);
+					$scope.disableAppointment = true;
                 } else {
                     FlashService.Error(response.message);
                 }
@@ -155,13 +175,7 @@
 			$scope.markers.push(marker);
                   
         }  
-		
-		
-
 	
-	
-	
-
     }
 
 })();

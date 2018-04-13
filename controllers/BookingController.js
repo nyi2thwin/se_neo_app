@@ -14,6 +14,28 @@ exports.findBookingByClinicId = function(req,res){
 	});
 };
 
+exports.findBookingByUserIdAndStatus = function(req,res){
+	Booking.find({userId:req.body.userId, status:req.body.status}, function(err,bookings) {
+		if(err)
+			res.send(err);
+		
+		var results =[];
+		var promises = [];
+	    bookings.map(booking => {
+        	promises.push(Clinic.findOne({_id:booking.clinicId}).exec().then((clinic) => {
+		    	var result = booking.toJSON();
+				result['clinic'] = clinic.toJSON();
+				results.push(result);
+			}));
+				
+				
+		});
+		Promise.all(promises).then(function(result) {
+			res.json(results);
+		});
+	});
+};
+
 exports.findBookingByUserId = function(req,res){
 	Booking.find({userId:req.body.userId}, function(err,bookings) {
 		if(err)

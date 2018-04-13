@@ -14,6 +14,7 @@
 		var deleteBookingURL = "http://localhost:3000/deleteBooking";
 		var MarkVisitedURL = "http://localhost:3000/markVisited";
 		var sendNotification = "http://localhost:3000/sendNotification";
+		var findBookingByUserIdAndStatus = "http://localhost:3000/findBookingByUserIdAndStatus";
 
         service.MakeAppointment = MakeAppointment;
 		service.Create = Create;
@@ -21,8 +22,9 @@
 		service.Notify = Notify;
 		service.FindBookingByUserId = FindBookingByUserId;
 		service.FindBookingByClinicId = FindBookingByClinicId;
+		service.FindUserCurrentAppointment = FindUserCurrentAppointment;
+		service.FindUserAppointHistory = FindUserAppointHistory;
 		service.MarkVisited = MarkVisited;
-		
         return service;
 		
 		
@@ -74,24 +76,31 @@
 			});
         }
 		
+		
 		function FindBookingByClinicId(clinicId) {
-			 var dataToSend = 
-			{
-				"clinicId":clinicId,
-			};    
+			 var dataToSend = {"clinicId":clinicId};    
 			
             return $http.post(findBookingByClinicIdURL,dataToSend).then(handleSuccess, handleError('Error getting Booking by ClinicId'));
         }
 		
 		function FindBookingByUserId(userId) {
-			 var dataToSend = 
-			{
-				"userId":userId,
-			};    
+			 var dataToSend = {"userId":userId};    
 			
             return $http.post(findBookingByUserIdURL,dataToSend).then(handleSuccess, handleError('Error getting Booking by UserId'));
         }
 				
+		function FindUserCurrentAppointment(userId) {
+			 var dataToSend = {"userId":userId, "status":"waiting"};    
+			
+            return $http.post(findBookingByUserIdAndStatus,dataToSend).then(handleSuccess, handleError('Error getting user current booking'));
+		}
+		
+		function FindUserAppointHistory(userId) {
+			 var dataToSend = {"userId":userId, "status":"visited"};    
+			
+            return $http.post(findBookingByUserIdAndStatus,dataToSend).then(handleSuccess, handleError('Error getting user appoint history'));
+		}
+		
 		function Create(booking) {
 		    return $http.post(createBookingURL,booking).then(handleSuccess, handleError('Error creating Booking'));
         }
