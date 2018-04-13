@@ -1,5 +1,5 @@
 ﻿body{
-    background-image: linear-gradient(0deg,rgba(170,170,170,0.3),rgba(170,170,170,0.9)),url('../pics/map_bg.png');
+    background-image: linear-gradient(0deg, rgba(110, 110, 110, 0.3), rgba(110, 110, 110, 0.9)),url('../pics/map_bg.png');
     background-size: cover;
 }
 
