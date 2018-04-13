@@ -28,3 +28,8 @@
     border:0px;
     border-bottom:1px solid #bcbcbc;
 }
+
+.map-box{
+	padding:0px;
+	border-left:1px solid #bcbcbc;
+}
