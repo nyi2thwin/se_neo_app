@@ -60,6 +60,26 @@ a, a:hover, a:focus {
     float: right;
 }
 
+#icon {
+    width: 100%;
+}
+
+#tabletitle {
+    background: transparent;
+}
+
+#cancel {
+    color:gray;
+}
+
+#repeat {
+    color: #606060;
+}
+
+.material-icons {
+    color:gray;
+}
+
 .md-calendar tbody, .md-calendar td, .md-calendar tr {
     color: black;
 }
@@ -67,13 +87,19 @@ a, a:hover, a:focus {
 .md-datepicker-input {
     color: white;
 }
+
 .docs-navbar-header {
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
 
     width: 100%;
 }
+
+.form-group .help-block {
+    color: #ca3a32;
+}
+
 .div.navbar-footer {
     display:inline;
     float: right;

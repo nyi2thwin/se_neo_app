@@ -1,6 +1,18 @@
 ﻿<div class="col-md-9">
-    <h2 style= "display:inline">My Account Info</h2>
-	  <md-button align="center" type="submit" class="md-raised" ng-disabled="!disableForm"  ng-click ="enableFormEdit()">Edit</md-button>
+
+    <div id="icon">
+        <table id="tabletitle" width="100%">
+            <tr>
+                <td><h2>Account Information</h2></td>
+                <td style="text-align:right;">
+                    <md-button ng-disabled="!disableForm"  ng-click ="enableFormEdit()" class="md-fab md-primary" aria-label="Edit">
+                        <md-icon md-svg-src="./pics/pencil.svg"></md-icon>
+                    </md-button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
     <form name="form" role="form">
 
         <div class="form-group" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
