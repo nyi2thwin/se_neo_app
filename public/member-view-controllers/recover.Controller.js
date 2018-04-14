@@ -3,38 +3,29 @@
 
     angular
         .module('app')
-        .controller('recoverController', recoverController);
+        .controller('RecoverPasswordController', RecoverPasswordController);
 
-    recoverController.$inject = ['$location','FlashService','$rootScope','AuthenticationService'];
-    function recoverController($location,FlashService,$rootScope,AuthenticationService) {
+    RecoverPasswordController.$inject = ['$location','FlashService','$rootScope','User'];
+    function RecoverPasswordController($location,FlashService,$rootScope,User) {
+		
 
-/*
         var vm = this;
-        vm.login = login;
+	    vm.recoverPassword = recoverPassword;
 
-        (function initController() {
-            // reset login status
-            $rootScope.isClinic = false;
-            $rootScope.isGuest = false;
-            AuthenticationService.ClearCredentials();
-        })();
-
-        function login() {
+        function recoverPassword() {
             vm.dataLoading = true;
-
-            AuthenticationService.Login(vm.username, vm.password, function (response) {
-                if (response.success) {
-                    AuthenticationService.SetCredentials(vm.username, vm.password,response.data,false);
-                    $rootScope.loggedIn = true;
-                    $rootScope.userName = response.data.name;
-                    $location.path('/home');
-                } else {
-                    FlashService.Error(response.message);
-                    vm.dataLoading = false;
-                }
-            });
+			
+			User.ResetPasswordByEmail(vm.email)
+				.then(function (response) {
+						if (response !== null) {
+							FlashService.Success("New Password had been sent to your email",false);
+						} else {
+							FlashService.Error(response.message);
+						}
+						vm.dataLoading = false;
+				});
         };
-*/
+	
     }
 
 })();

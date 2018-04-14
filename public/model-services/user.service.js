@@ -12,6 +12,7 @@
         service.GetByNric = GetByNric;
         service.Create = Create;
 		service.Update = Update;
+		service.ResetPasswordByEmail = ResetPasswordByEmail;
      
 
         return service;
@@ -28,7 +29,11 @@
 		function Update(user) {
             return $http.post("http://localhost:3000/updateUser", user).then(handleSuccess, handleError('Error updating user'));
         }
-
+		
+		function ResetPasswordByEmail(email) {
+			var id = {"email":email};
+			return $http.post("http://localhost:3000/resetPasswordByEmail",id).then(handleSuccess, handleError('Error Reseting Password'));
+		}
         // private functions 
 
         function handleSuccess(res) {
