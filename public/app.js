@@ -41,7 +41,7 @@
             })
 
             .when('/recover', {
-                controller: 'recoverController',
+                controller: 'RecoverPasswordController',
                 templateUrl: 'member-views/recover.view.html',
                 controllerAs: 'vm'
             })
