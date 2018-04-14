@@ -53,8 +53,10 @@
 			vm.dataLoading = true;
 			Clinic.GetNearByClinic($scope.postalCode)
 				.then(function (response) {
-					if (response !== null && response.success) {
+					if (response !== null && response.success && response.data.clinics) {
+
 						$scope.clinicList = response.data.clinics;
+
 						$scope.markers = []; //clear markers
 						$scope.hideSearchBox = false;
 						$scope.hideSearchResult = false;
@@ -67,7 +69,7 @@
 						}
 						
 					} else {
-						FlashService.Error(response.message);
+						FlashService.Error("Error in finding clinic. Please use correct postalcode.");
 					}
 					vm.dataLoading = false;
 			});
