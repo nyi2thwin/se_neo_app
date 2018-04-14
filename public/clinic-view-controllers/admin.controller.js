@@ -13,7 +13,7 @@
 		$rootScope.isClinic = false;
 		$rootScope.isGuest = false;
         vm.adminLogin = login;
-		
+		$rootScope.sidebarHide();
 		function login() {
             vm.dataLoading = true;
 			
