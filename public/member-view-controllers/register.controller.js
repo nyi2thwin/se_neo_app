@@ -22,11 +22,17 @@
 			};
 			User.Create(dataToSend)
 				.then(function (response) {
-					if (response !== null) {
+					if (response !== null && response._id) {
 						FlashService.Success('Registration successful', true);
 						$location.path('/login');
 					} else {
-						FlashService.Error(response.message);
+						if(response.code == "11000"){
+							FlashService.Error("Email is already registered.Please use different email");
+						}
+						else{
+							FlashService.Error(response.message);
+						}
+						
 					}
 					vm.dataLoading = false;
 			});
