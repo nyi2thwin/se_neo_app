@@ -18,7 +18,8 @@
 			User.ResetPasswordByEmail(vm.email)
 				.then(function (response) {
 						if (response.hasOwnProperty('_id')) {
-							FlashService.Success("New password will be sent to your email shortly.",false);
+							FlashService.Success("New password will be sent to your email shortly.",true);
+							$location.path('/login');
 						} else {
 							FlashService.Error("Email not found.",false);
 						}
