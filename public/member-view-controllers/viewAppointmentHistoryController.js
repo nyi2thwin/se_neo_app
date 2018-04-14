@@ -61,7 +61,7 @@
 				.then(function (response) {
 					if (response !== null && response.success) {
 							
-						FlashService.Success(response.data.message);
+						FlashService.Success("Appointment is canceled successfully!");
 						$scope.disableAppointment = false;
 						init();
 					} else {

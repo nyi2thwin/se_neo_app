@@ -22,17 +22,21 @@
         </div>
         <div class="form-group" ng-class="{ 'has-error': form.nric.$dirty && form.nric.$error.required }">
             <label for="nric">NRIC</label>
-            <input type="text" name="nric" id="nric" class="form-control" ng-disabled="true" ng-model="mdata.nric" required />
+            <input type="text" name="nric" id="nric" class="form-control" ng-disabled="true" ng-model="mdata.nric" ng-pattern="/^[STFG]\d{7}[A-Z]$/" required />
+			<span ng-show="form.nric.$dirty && form.nric.$error.required" class="help-block">NRIC is required</span>
+			<span ng-show="form.nric.$error.pattern" class="help-block">Invalid NRIC</span>
         </div>
 		<div class="form-group" ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }">
             <label for="email">Email</label>
             <input type="text" name="email" id="email" class="form-control" ng-disabled="disableForm" ng-model="mdata.email" required />
             <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email is required</span>
+			<span ng-show="form.email.$error.email" class="help-block">Invalid Email</span>
         </div>
 		<div class="form-group" ng-class="{ 'has-error': form.contact.$dirty && form.contact.$error.required }">
             <label for="contact">Contact</label>
-            <input type="text" name="contact" id="contact" class="form-control" ng-disabled="disableForm" ng-model="mdata.contact" required />
+            <input type="text" name="contact" id="contact" class="form-control" ng-disabled="disableForm" ng-model="mdata.contact" ng-pattern="/\d{8}/" required required />
             <span ng-show="form.contact.$dirty && form.contact.$error.required" class="help-block">Contact is required</span>
+			<span ng-show="form.contact.$error.pattern" class="help-block">Invalid Contact</span>
         </div>
 		 <div class="form-group" ng-class="{ 'has-error': form.dob.$dirty && form.dob.$error.required }">
             <label for="dob">Date of Birth</label>
@@ -42,9 +46,19 @@
         </div>
         <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" class="form-control" ng-disabled="disableForm" ng-model="mdata.password" required />
+            <input type="password" name="password" id="password" class="form-control" ng-disabled="disableForm" ng-model="mdata.password" ng-pattern="/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/" required />
             <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+			<span ng-show="form.password.$error.pattern" class="help-block">Password must include UpperCase, LowerCase, Number, SpecialChar and minimum 8 Characters long.</span>
         </div>
+		
+		<div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }" ng-disabled="disableForm"  ng-hide ="disableForm">
+            <label for="password">Confirm Password</label>
+            <input type="password" name="cpassword" id="cpassword" class="form-control" ng-model="mdata.cpassword"
+                   required/>
+            <span ng-show="(mdata.password!='' && mdata.cpassword!='') && (mdata.password != mdata.cpassword)"
+                  class="help-block">Passwords do not match!</span>
+        </div>
+		
         <div class="form-actions" ng-disabled="disableForm"  ng-hide ="disableForm" align="right">
             <md-button md-no-ink class="md-primary" ng-click ="cancelFormEditing()">Cancel</md-button>
             <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />

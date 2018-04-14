@@ -21,6 +21,7 @@
 				.then(function (user) {
 					if (user !== null && user._id) {
 						$scope.mdata = user;
+						$scope.mdata.cpassword = user.password;
 						dataBeforeUpdate = angular.copy($scope.mdata);
 					} else {
 						FlashService.Error(user.message);
@@ -46,6 +47,7 @@
 						$scope.disableForm = true;
 						$rootScope.userName = user.name;
 						FlashService.Success('Update successful', false);
+						$scope.mdata.cpassword = user.password;
 						dataBeforeUpdate = angular.copy($scope.mdata);
 					} else {
 						FlashService.Error(user.message);
