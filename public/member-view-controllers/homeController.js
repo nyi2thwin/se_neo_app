@@ -27,11 +27,7 @@
 			Booking.FindUserCurrentAppointment(loggedIn.id)
 				.then(function (response) {
 						if (response !== null && response.success) {
-							if(response.data.length != 0){
-								$scope.disableAppointment = true;	
-							}else{
-								$scope.disableAppointment = false;
-							}
+							$scope.disableAppointment = (response.data.length !== 0);
 						} else {
 							FlashService.Error(response.message);
 						}
@@ -100,7 +96,7 @@
 		vm.makeAppoint = function(){
 			vm.dataLoading = true;
 			Booking.MakeAppointment(loggedIn.id,$scope.mdata.clinic._id, function (response) {
-                if (response != null & response.success) {
+                if (response != null && response.success) {
                     FlashService.Success(response.message,false);
 					$scope.disableAppointment = true;
                 } else {

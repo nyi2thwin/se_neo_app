@@ -8,9 +8,6 @@
     viewAppointmentHistoryController.$inject = ['$scope', '$rootScope', 'FlashService', 'Booking'];
     function viewAppointmentHistoryController($scope, $rootScope, FlashService, Booking) {
 		 var vm = this;
-		 var findBookingByUserIdURL = "http://localhost:3000/findClinicById";
-		 var bookingURL = "";
-		 var dataBeforeUpdate = {};
 
 		 $scope.mdata = {};
 		 $scope.disableForm = true;
@@ -48,7 +45,7 @@
 		vm.book = function(clinic){
 			vm.dataLoading = true;
 			Booking.MakeAppointment($rootScope.globals.currentUser.id,clinic._id, function (response) {
-                if (response != null & response.success) {
+                if (response != null && response.success) {
                     FlashService.Success(response.message,false);
 					init();
                 } else {

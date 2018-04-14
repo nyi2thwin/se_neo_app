@@ -24,7 +24,7 @@
 						}
 						vm.dataLoading = false;
 				});
-        };
+        }
 	
     }
 
