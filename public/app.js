@@ -98,6 +98,7 @@
         }
 
         $rootScope.logout = function(){
+
             $rootScope.globals = {};
             $rootScope.userName = "";
             $cookies.remove('globals');
@@ -105,7 +106,7 @@
             $rootScope.isClinic = false;
             $rootScope.isGuest = false;
             $rootScope.loggedIn = false;
-            $location.path('/login');
+
         }
         init();
 
