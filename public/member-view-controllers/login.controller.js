@@ -17,7 +17,7 @@
 			$rootScope.isClinic = false;
 			$rootScope.isGuest = false;
             AuthenticationService.ClearCredentials();
-            $rootScope.sidebarCollapse();
+            $rootScope.sidebarHide();
         })();
 		
         function login() {

@@ -90,6 +90,13 @@
             $('a[aria-expanded=true]').attr('aria-expanded', 'false');
         }
 
+        $rootScope.sidebarHide = function() {
+            $('#sidebar').addClass('active');
+            $('#content').addClass('active');
+            //$('.collapse.in').toggleClass('in');
+            //$('a[aria-expanded=true]').attr('aria-expanded', 'false');
+        }
+
         $rootScope.logout = function(){
             $rootScope.globals = {};
             $rootScope.userName = "";
@@ -106,6 +113,7 @@
             // redirect to login page if not logged in and trying to access a restricted page
             var restrictedPage = $.inArray($location.path(), ['/login', '/register','/home','/admin','/recover']) === -1;
             var loggedIn = $rootScope.globals.currentUser;
+            $rootScope.currentPath = $location.path();
             if (loggedIn){
 				$rootScope.userName = loggedIn.name;
 			}

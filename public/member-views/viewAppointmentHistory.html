@@ -8,12 +8,13 @@
 			  <th scope="col">Time</th>
 			  <th scope="col">Status</th>
 			  <th scope="col">My Qno</th>
+			  <th scope="col">&nbsp;</th>
 			</tr>
 		</thead>
 		<tbody>
  
 		  <tr ng-repeat="booking in mdata.currentBooking">
-			<td style="width:30%;" class="text-center" filter="{name:'text'}" sortable="'name'">
+			<td style="width:50%;" class="text-center" filter="{name:'text'}" sortable="'name'">
 				<strong>{{booking.clinic.name}}</strong>
 				<div class="stats">
 					<span><i class="fa fa-bath"></i>{{booking.clinic.address}}</span>
@@ -21,7 +22,7 @@
 				</div>
 			</td>
 			
-			<td style="width:15%;" class="text-left" filter="{dateTime:'text'}" sortable="'dateTime'">
+			<td style="width:20%;" class="text-left" filter="{dateTime:'text'}" sortable="'dateTime'">
 				{{booking.dateTime}}
 			</td>
 			<td style="width:10%;" class="text-left" filter="{status:'text'}" sortable="'status'">
@@ -46,12 +47,13 @@
 			  <th scope="col">Time</th>
 			  <th scope="col">Status</th>
 			  <th scope="col">My Qno</th>
+			  <th scope="col">&nbsp;</th>
 			</tr>
 		</thead>
 		<tbody>
  
 		  <tr ng-repeat="booking in mdata.bookings">
-			<td style="width:30%;" class="text-center" filter="{name:'text'}" sortable="'name'">
+			<td style="width:50%;" class="text-center" filter="{name:'text'}" sortable="'name'">
 				<strong>{{booking.clinic.name}}</strong>
 				<div class="stats">
 					<span><i class="fa fa-bath"></i>{{booking.clinic.address}}</span>
@@ -59,7 +61,7 @@
 				</div>
 			</td>
 			
-			<td style="width:15%;" class="text-left" filter="{dateTime:'text'}" sortable="'dateTime'">
+			<td style="width:20%;" class="text-left" filter="{dateTime:'text'}" sortable="'dateTime'">
 				{{booking.dateTime}}
 			</td>
 			<td style="width:10%;" class="text-left" filter="{status:'text'}" sortable="'status'">

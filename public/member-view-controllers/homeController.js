@@ -23,6 +23,7 @@
 				
 		var loggedIn = $rootScope.globals.currentUser;
 		var init = function() {
+			$rootScope.sidebarCollapse();
 			Booking.FindUserCurrentAppointment(loggedIn.id)
 				.then(function (response) {
 						if (response !== null && response.success) {

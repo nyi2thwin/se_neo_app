@@ -87,7 +87,7 @@
 
 
 		<div id="content">
-			<nav class="docs-navbar-header">
+			<nav class="docs-navbar-header" ng-hide="currentPath === '/login' || currentPath === '/register' || currentPath === '/recover'">
 				<div class="navbar-header">
 					<md-button aria-label="showhidesidebar" ng-click="sidebarCollapse()" class="sidebar-button md-raised md-primary">
 						<i class="glyphicon glyphicon-align-left"></i>

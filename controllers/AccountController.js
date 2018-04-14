@@ -65,8 +65,12 @@ exports.resetPasswordByID = function(req,res){
 	User.findOneAndUpdate({_id:req.body.userId},{password:new_password}, function(err,user) {
 		if(err)
 			res.send(err);
-		send_email(new_password,user.email,user.nric);
-		res.json(user);
+		if(user){
+			send_email(new_password,user.email,user.nric);
+			res.json(user);
+		}else{
+			res.json({})
+		}
 	});
 };
 
@@ -75,8 +79,13 @@ exports.resetPasswordByEmail = function(req,res){
 	User.findOneAndUpdate({email:req.body.email},{password:new_password}, function(err,user) {
 		if(err)
 			res.send(err);
-		send_email(new_password,user.email,user.nric);
-		res.json(user);
+		if(user){
+			send_email(new_password,user.email,user.nric);
+			res.json(user);
+		}else{
+			res.json({})
+		}
+		
 	});
 };
 //reset password related stuff below

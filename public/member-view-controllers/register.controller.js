@@ -8,7 +8,7 @@
     RegisterController.$inject = ['$location','FlashService','User'];
     function RegisterController($location,FlashService,User) {
         var vm = this;
-       
+     	$rootScope.sidebarHide();
         vm.register = function() {
            vm.dataLoading = true;
 			var dataToSend =
