@@ -5,8 +5,8 @@
         .module('app')
         .controller('RegisterController', RegisterController);
 
-    RegisterController.$inject = ['$location','FlashService','User'];
-    function RegisterController($location,FlashService,User) {
+    RegisterController.$inject = ['$location','FlashService','User','$rootScope'];
+    function RegisterController($location,FlashService,User,$rootScope) {
         var vm = this;
      	$rootScope.sidebarHide();
         vm.register = function() {

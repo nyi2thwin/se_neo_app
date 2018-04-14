@@ -10,7 +10,7 @@
         <div class="form-group" ng-class="{ 'has-error': form.nric.$dirty && form.nric.$error.required }">
             <label for="nric">NRIC</label>
             <input type="text" name="nric" id="nric" class="form-control" ng-model="vm.user.nric"
-                   ng-pattern="^[STFG]\d{7}[A-Z]$" required/>
+                    required/>
             <span ng-show="form.nric.$dirty && form.nric.$error.required" class="help-block">NRIC is required</span>
         </div>
 
@@ -22,7 +22,7 @@
 
         <div class="form-group" ng-class="{ 'has-error': form.contact.$dirty && form.contact.$error.required }">
             <label for="contact">Contact</label>
-            <input type="text" name="contact" id="contact" class="form-control" ng-model="vm.user.contact" ng-pattern="\d{8}"
+            <input type="text" name="contact" id="contact" class="form-control" ng-model="vm.user.contact"
                    required/>
             <span ng-show="form.contact.$dirty && form.contact.$error.required"
                   class="help-block">Contact is required</span>
