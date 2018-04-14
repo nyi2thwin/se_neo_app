@@ -1,6 +1,6 @@
 ﻿
 <h2>Current Appointment</h2>
-<label ng-hide="disableAppointment"> You have an Appointment</label>
+<label ng-show="mdata.currentBooking.length == 0"> You have no current Appointment</label>
 <table class="table table-hover" ng-hide="mdata.currentBooking.length == 0">
 		<thead>
 			<tr>
