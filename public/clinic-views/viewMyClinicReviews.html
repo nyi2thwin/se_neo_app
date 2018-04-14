@@ -1,6 +1,6 @@
 ﻿<div>
     <h2>My Clinic Reviews</h2>
-	<div class="media-body pl-3" ng-repeat="review in mdata.reviews">
+	<div class="media-body pl-3 review-box" ng-repeat="review in mdata.reviews">
 		<jk-rating-stars rating="review.rating" read-only="true" ></jk-rating-stars>
 		<div class="name"><small>{{review.username}}</small></div>
 		<div class="stats">

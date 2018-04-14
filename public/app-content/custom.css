@@ -12,7 +12,7 @@
 	padding:20px;
 }
 .search-box {
-    height: 80%;
+    height: 70%;
     box-shadow: 10px 10px 0 rgba(0,0,0,0.2);
 }
 .ng-scope{
@@ -34,14 +34,52 @@
 	border-left:1px solid #bcbcbc;
 }
 
-table,form{
+table,form,.review-box{
     background: rgba(0,0,0,0.4);
     padding:20px;
 }
-
+.review-box{
+    color:white;
+}
 .table-hover > tbody > tr:hover > td, .table-hover > tbody > tr:hover > th{
     background:none;
 }
+.container-fluid{
+    background:none;
+    box-shadow:none;
+}
+.sidebar-button.md-button{
+    min-width: 60px;
+    margin: 0px;
+}
 .search-box{
     width:100%;
+}
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+@media (max-width: 768px) {
+    #sidebar {
+        position:absolute;
+        
+    }
+
+    #sidebar.active {
+        margin-left: 0;
+        width:80%;
+    }
+    #content {
+        width: 100%;
+    }
+    #content.active {
+        width: 100%;
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+    #content.active .navbar-header{
+        width: calc(100% - 80%);
+        margin-left:80%;
+    }
 }
