@@ -19,34 +19,66 @@
 				<a href="#!/home">
 					<img src="./pics/NeoBookingLogo.png" id="logo" alt="NeoBooking" />
 				</a>
-				<h3 style = "padding: 10px;">{{userName}}</h3>
+				<h4 ng-show="loggedIn && !isClinic" style = "padding: 10px;">Hello, {{userName}}</h4>
+				<h4 ng-show="isClinic" style = "padding: 10px;">Clinic: {{userName}}</h4>
 			</div>
 			<ul class="list-unstyled components" ng-show="isGuest">
 				<li>
-					<a href="#!/login">Login</a>
+					<a href="#!/login">
+						<i class="glyphicon glyphicon-log-out" style="padding-right: 5px;"></i>
+						Login
+					</a>
 				</li>
 				<li>
-					<a href="#!/register">Register</a>
+					<a href="#!/register">
+						<i class="glyphicon glyphicon-tasks" style="padding-right: 5px;"></i>
+						Register
+					</a>
 				</li>
 			</ul>
 			<ul class="list-unstyled components" ng-show="loggedIn">
 				<li ng-show="isClinic">
-					<a href="#!/listPatient">Patients in Queue</a>
+					<a href="#!/listPatient">
+						<i class="glyphicon glyphicon-user" style="padding-right: 5px;"></i>
+						Patients in Queue
+					</a>
 				</li>
 				<li ng-show="isClinic">
-					<a href="#!/viewMyClinicInfo">My Clinic Info</a>
+					<a href="#!/viewMyClinicInfo">
+						<i class="glyphicon glyphicon-tasks" style="padding-right: 5px;"></i>
+						My Clinic Info
+					</a>
 				</li>
 				<li ng-show="isClinic">
-					<a href="#!/viewMyClinicReviews">My Clinic Reviews</a>
+					
+					<a href="#!/viewMyClinicReviews">
+						<i class="glyphicon glyphicon-check" style="padding-right: 5px;"></i>
+						My Clinic Reviews
+					</a>
 				</li>
 				<li ng-show="!isClinic">
-					<a href="#!/home">Search Nearby Clinic</a>
+					<a href="#!/home">
+						<i class="glyphicon glyphicon-search" style="padding-right: 5px;"></i>
+						Search Nearby Clinic
+					</a>
 				</li>
 				<li ng-show="!isGuest && !isClinic">
-					<a href="#!/viewMyInfo">My Account Info</a>
+					<a href="#!/viewMyInfo">
+						<i class="glyphicon glyphicon-user" style="padding-right: 5px;"></i>
+						My Account Info
+					</a>
 				</li>
 				<li ng-show="!isGuest && !isClinic">
-					<a href="#!/viewHistory">Appointment History</a>
+					<a href="#!/viewHistory">
+						<i class="glyphicon glyphicon-inbox" style="padding-right: 5px;"></i>
+						Appointment History
+					</a>
+				</li>
+				<li ng-show="loggedIn" >
+					<a href="#!/logout"  ng-click="logout();">
+						<i class="glyphicon glyphicon-log-out" style="padding-right: 5px;"></i>
+						Logout
+					</a>
 				</li>
 			</ul>
 		</nav>
@@ -55,25 +87,18 @@
 
 
 		<div id="content">
-			<nav class="docs-navbar-header" ng-show="loggedIn">
-				<div class="container-fluid">
-					<div class="navbar-header">
-						<md-button ng-click="sidebarCollapse()" class="md-raised md-primary">
-							<i class="glyphicon glyphicon-align-left"></i>
-							<span>Sidebar</span>
-						</md-button>
-					</div>
-
-					<div class="navbar-footer">
-						<md-button type="submit" ng-click="logout();" ng-show="loggedIn" class="md-raised md-warn md-hue-2 logout">Logout</md-button>
-					</div>
+			<nav class="docs-navbar-header">
+				<div class="navbar-header">
+					<md-button aria-label="showhidesidebar" ng-click="sidebarCollapse()" class="sidebar-button md-raised md-primary">
+						<i class="glyphicon glyphicon-align-left"></i>
+					</md-button>
 				</div>
 			</nav>
 			<div style="top: auto">
 				<div style="color: grey" ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
 			</div>
 
-			<div ng-view style="height:100%; position: relative; top:30px"></div>
+			<div ng-view style="height:100%; position: relative;"></div>
 		</div>
 
 	</div>
