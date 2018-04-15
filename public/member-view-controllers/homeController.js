@@ -122,8 +122,8 @@
             vm.dataLoading = true;
             var dataToSend = 
 			{
-				"clinicId":$scope.mdata.clinic._id,
-				"userId":loggedIn.id,
+				"_clinicId":$scope.mdata.clinic._id,
+				"_userId":loggedIn.id,
 				"content":$scope.newComment,
 				"username":loggedIn.name,
 				"rating":$scope.firstRate,
