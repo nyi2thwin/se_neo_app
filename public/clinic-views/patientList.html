@@ -3,22 +3,28 @@
 	<table class="table table-hover">
 		<thead>
 			<tr>
-			  <th scope="col">id</th>
-			  <th scope="col">Name</th>
-			  <th scope="col">Queue No</th>
+			  <th scope="col" width="15%">NRIC</th>
+			  <th scope="col" width="15%" >Name</th>
+			  <th scope="col" width="15%" >Contact</th>
+			  <th scope="col" width="10%">Queue No</th>
+			  <th scope="col"></th>
 			</tr>
 		</thead>
 		<tbody>
  
-		  <tr ng-repeat="patient in patientList">
+		  <tr ng-repeat="patient in patientList" ng-if="patient.status != 'visited'">
 			<td style="width:10%;" ng-model="userId" class="text-right" title="'Patient NRIC'"
 				filter="{userId:'number'}" sortable="'userId'">
-				{{patient.userId}}
+				{{patient.user.nric}}
 			</td>
 			
 			<td style="width:20%;" class="text-left" title="'Patient Name'"
 				filter="{name:'text'}" sortable="'name'">
-				{{patient.name}}
+				{{patient.user.name}}
+			</td>
+			<td style="width:20%;" class="text-left" title="'Patient Name'"
+				filter="{name:'text'}" sortable="'name'">
+				{{patient.user.contact}}
 			</td>
 			<td style="width:10%;" class="text-left" title="'Queue No.'"
 				filter="{name:'text'}" sortable="'queNo'">
@@ -34,13 +40,60 @@
 					<md-button type="button" ng-click="notify(patient._id)" class="md-raised">Notify</md-button>
 					<md-button type="button" ng-click="mark_visit(patient._id)" class="md-raised">Mark Visited</md-button>
 				</div>
-
-				
-				
             </td>
       		
 		  </tr>
 		</tbody>
 	</table>
-	
 </div>	
+<hr>
+<div>
+	<h2> Visited Patients </h2>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+			  <th scope="col" width="15%">NRIC</th>
+			  <th scope="col" width="15%" >Name</th>
+			  <th scope="col" width="15%" >Contact</th>
+			  <th scope="col" width="10%">Queue No</th>
+			  <th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody>
+ 
+		  <tr ng-repeat="patient in patientList" ng-if="patient.status == 'visited'">
+			<td style="width:10%;" ng-model="userId" class="text-right" title="'Patient NRIC'"
+				filter="{userId:'number'}" sortable="'userId'">
+				{{patient.user.nric}}
+			</td>
+			
+			<td style="width:20%;" class="text-left" title="'Patient Name'"
+				filter="{name:'text'}" sortable="'name'">
+				{{patient.user.name}}
+			</td>
+			<td style="width:20%;" class="text-left" title="'Patient Name'"
+				filter="{name:'text'}" sortable="'name'">
+				{{patient.user.contact}}
+			</td>
+			<td style="width:10%;" class="text-left" title="'Queue No.'"
+				filter="{name:'text'}" sortable="'queNo'">
+				{{patient.queNo}}
+			</td>
+			
+            <td>
+            	<div ng-if="patient.status == 'visited'">
+				    Visited
+				</div>
+				<div ng-if="patient.status != 'visited'">
+				    <md-button type="button" ng-click="unqueue(patient._id)" class="md-raised">Unqueue</md-button>
+					<md-button type="button" ng-click="notify(patient._id)" class="md-raised">Notify</md-button>
+					<md-button type="button" ng-click="mark_visit(patient._id)" class="md-raised">Mark Visited</md-button>
+				</div>
+            </td>
+      		
+		  </tr>
+		</tbody>
+	</table>
+</div>
+	
+

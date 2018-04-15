@@ -45,11 +45,16 @@ exports.listNearbyClinic = function(req, res) {
 	geocoder.geocode(req.params.postalcode+ " Singapore", function(err, result) {
 	  	if (err)
 			return res.send(err);
-		Clinic.find( { location : { $near : [result[0]['latitude'],result[0]['longitude']] } } ).limit(5).exec(function(err, results) {
-   			if(err)
-				return res.send(err);
-			res.json({clinics:results,lat:result[0]['latitude'],long:result[0]['longitude']});
-		});
+		if(result.length > 0){
+			Clinic.find( { location : { $near : [result[0]['latitude'],result[0]['longitude']] } } ).limit(5).exec(function(err, results) {
+	   			if(err)
+					return res.send(err);
+				res.json({clinics:results,lat:result[0]['latitude'],long:result[0]['longitude']});
+			});
+		}else{
+			res.json({});
+		}		
+		
 	});
 	
 };
