@@ -37,8 +37,9 @@
 					var estimatedTime = 0;
 					if(lastIndex != 0){
 						lastQno = booking.data[lastIndex-1].queNo;
-						estimatedTime = lastQno * 5 ;
+						
 					}
+					estimatedTime = (lastQno * 5) + 5;
 					
 					var currentDate =  $filter('date')(new Date(), "MM-dd-yyyy");
 					var newQno = lastQno + 1;
