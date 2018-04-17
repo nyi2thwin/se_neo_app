@@ -23,6 +23,7 @@
 				
 		var loggedIn = $rootScope.globals.currentUser;
 		var init = function() {
+
 			if(!isMobile())
 				$rootScope.sidebarShow();
 			Booking.FindUserCurrentAppointment(loggedIn.id)
@@ -44,7 +45,33 @@
 			init();
 		}
 		
-		
+		vm.getLatLong = async function(){
+        	//vm.dataLoading = true;
+	    	vm.dataLoading = true;
+	    	var result = await getLatLongText();
+	    	
+		  	Clinic.GetNearByClinic(result)
+				.then(function (response) {
+					
+					if (response !== null && response.success && response.data.clinics) {
+						$scope.clinicList = response.data.clinics;
+						$scope.markers = []; //clear markers
+						$scope.hideSearchBox = false;
+						$scope.hideSearchResult = false;
+						$scope.hideDetailResult = true;
+						$scope.map.setCenter(new google.maps.LatLng(response.data.lat,response.data.long));
+						$scope.map.setZoom(15);
+						for (var i = 0; i < $scope.clinicList.length; i++){
+							createMarker($scope.clinicList[i]);
+							console.log($scope.clinicList[i]);
+						}
+						
+					} else {
+						FlashService.Error("Error in finding clinic. Please use correct postalcode.");
+					}
+					vm.dataLoading = false;
+			});
+	    }
 		
 		vm.search = function() {
 			vm.dataLoading = true;
@@ -153,7 +180,7 @@
                   styles: [{"featureType":"all","elementType":"geometry.fill","stylers":[{"weight":"2.00"}]},{"featureType":"all","elementType":"geometry.stroke","stylers":[{"color":"#9c9c9c"}]},{"featureType":"all","elementType":"labels.text","stylers":[{"visibility":"on"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"landscape","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"landscape.man_made","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road","elementType":"geometry.fill","stylers":[{"color":"#eeeeee"}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"color":"#7b7b7b"}]},{"featureType":"road","elementType":"labels.text.stroke","stylers":[{"color":"#ffffff"}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#c8d7d4"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"color":"#070707"}]},{"featureType":"water","elementType":"labels.text.stroke","stylers":[{"color":"#ffffff"}]}]
         }
 		$scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
+		$scope.geoCoder = new google.maps.Geocoder();
 	  
 		var infoWindow = new google.maps.InfoWindow();
 		$scope.openInfoWindow = function(e, selectedMarker){
@@ -178,7 +205,16 @@
 			$scope.markers.push(marker);
                   
         }  
+
+        
 	
+    }
+    function getLatLongText(){
+    	return new Promise(function(resolve, reject) {
+        	navigator.geolocation.getCurrentPosition(function(position) {
+				resolve(position.coords.latitude+" "+ position.coords.longitude); 		
+			});
+        });
     }
     function isMobile() {
         var check = false;
