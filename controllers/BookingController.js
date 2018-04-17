@@ -112,7 +112,7 @@ exports.sendNotification = function(req, res) {
 				var username = "AC0f15abf92c5e30938d7f8990736f26e6";
 				var password = "425ad2653fc524626d6933139cd12ed2";
 				
-				var bodymsg = "Your queue number is in 5 min!";
+				var bodymsg = "This is from neoBooking. Your queue number is in 5 min. Please proceed to clinic as soon as possible.";
 				
 				var options = {
 							    url: 'https://api.twilio.com/2010-04-01/Accounts/AC0f15abf92c5e30938d7f8990736f26e6/Messages.json',
