@@ -26,7 +26,7 @@
 						FlashService.Success('Registration successful', true);
 						$location.path('/login');
 					} else {
-						if(response.code === "11000"){
+						if(response.code == "11000"){
 							FlashService.Error("Email/NRIC/Contact No is already registered. Please use different particular");
 						}
 						else{

@@ -5,7 +5,25 @@ var mongoose = require('mongoose'),
 	User = mongoose.model('User'),
 	request = require('request');
 
-
+exports.findBookingByClinicIdAndStatus = function(req,res){
+	Booking.find({clinicId:req.body.clinicId, status:req.body.status}, function(err,bookings) {
+		if(err)
+			res.send(err);
+		//res.json(booking);
+		var results =[];
+		var promises = [];
+	    bookings.map(booking => {
+        	promises.push(User.findOne({_id:booking.userId}).exec().then((user) => {
+		    	var result = booking.toJSON();
+				result['user'] = user.toJSON();
+				results.push(result);
+			}));
+		});
+		Promise.all(promises).then(function(result) {
+			res.json(results);
+		});
+	});
+};
 exports.findBookingByClinicId = function(req,res){
 	Booking.find({clinicId:req.body.clinicId}, function(err,bookings) {
 		if(err)

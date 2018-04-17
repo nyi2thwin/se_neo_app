@@ -26,6 +26,9 @@ module.exports = function(app){
 	app.route('/findBookingByClinicId')
 	.post(bookingController.findBookingByClinicId);
 	
+	app.route('/findBookingByClinicIdAndStatus')
+	.post(bookingController.findBookingByClinicIdAndStatus);
+	
 	app.route('/findBookingByUserId')
 	.post(bookingController.findBookingByUserId);
 	

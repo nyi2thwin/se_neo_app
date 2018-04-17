@@ -15,6 +15,7 @@
 		var MarkVisitedURL = "/markVisited";
 		var sendNotification = "/sendNotification";
 		var findBookingByUserIdAndStatus = "/findBookingByUserIdAndStatus";
+		var findBookingByClinicIdAndStatus = "/findBookingByClinicIdAndStatus";
 
         service.MakeAppointment = MakeAppointment;
 		service.Create = Create;
@@ -24,13 +25,14 @@
 		service.FindBookingByClinicId = FindBookingByClinicId;
 		service.FindUserCurrentAppointment = FindUserCurrentAppointment;
 		service.FindUserAppointHistory = FindUserAppointHistory;
+		service.FindBookingByClinicIdAndStatus = FindBookingByClinicIdAndStatus;
 		service.MarkVisited = MarkVisited;
         return service;
 		
 		
         function MakeAppointment(userId,clinicId,callback){
 			var response;
-			FindBookingByClinicId(clinicId).then(function (booking) {
+			FindBookingByClinicIdAndStatus(clinicId,"waiting").then(function (booking) {
 				if (booking !== null && booking.success) {
 					var lastIndex = booking.data.length;
 					var lastQno = 0;
@@ -77,6 +79,11 @@
 			});
         }
 		
+		function FindBookingByClinicIdAndStatus(clinicId,bookingstatus) {
+			 var dataToSend = {"clinicId":clinicId, "status":bookingstatus};    
+			
+            return $http.post(findBookingByClinicIdAndStatus,dataToSend).then(handleSuccess, handleError('Error getting Booking by ClinicId'));
+        }
 		
 		function FindBookingByClinicId(clinicId) {
 			 var dataToSend = {"clinicId":clinicId};    
