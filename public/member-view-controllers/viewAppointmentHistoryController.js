@@ -11,6 +11,7 @@
 
 		 $scope.mdata = {};
 		 $scope.disableForm = true;
+		 $scope.disableAppointment = true;
 		 vm.dataLoading = false;
 
 		 var init = function(){
@@ -21,7 +22,12 @@
 					if (response !== null && response.success && response.data != null) {
 							
 						$scope.mdata.currentBooking = response.data;
-						$scope.disableAppointment = true;
+						if(response.data.length == 0) {
+							$scope.disableAppointment = false;
+						}
+						else{
+							$scope.disableAppointment = true;
+						}
 					} else {
 						FlashService.Error(response.message);
 						$scope.disableAppointment = false;
