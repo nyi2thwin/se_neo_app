@@ -24,7 +24,7 @@
 
         function GetById(id) {
 			var userId = {"userId":id};
-            return $http.post("http://localhost:3000/findUserById",userId).then(handleSuccess, handleError('Error getting user by id'));
+            return $http.post("/findUserById",userId).then(handleSuccess, handleError('Error getting user by id'));
         }
 
         function GetByUsername(username) {

@@ -8,8 +8,8 @@
     Booking.$inject = ['$rootScope','$http','$filter'];
     function Booking($rootScope,$http,$filter) {
         var service = {};
-		var findBookingByClinicIdURL = "http://localhost:3000/findBookingByClinicId";
-		var createBookingURL = "http://localhost:3000/createBooking";
+		var findBookingByClinicIdURL = "/findBookingByClinicId";
+		var createBookingURL = "/createBooking";
 
         service.MakeAppointment = MakeAppointment;
         return service;

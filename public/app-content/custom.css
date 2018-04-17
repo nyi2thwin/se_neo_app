@@ -56,7 +56,9 @@ table,form,.review-box{
 .search-box{
     width:100%;
 }
-
+#content{
+    overflow: scroll;
+}
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */

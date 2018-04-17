@@ -8,13 +8,13 @@
     Booking.$inject = ['$rootScope','$http','$filter'];
     function Booking($rootScope,$http,$filter) {
         var service = {};
-		var findBookingByClinicIdURL = "http://localhost:3000/findBookingByClinicId";
-		var findBookingByUserIdURL = "http://localhost:3000/findBookingByUserId";
-		var createBookingURL = "http://localhost:3000/createBooking";
-		var deleteBookingURL = "http://localhost:3000/deleteBooking";
-		var MarkVisitedURL = "http://localhost:3000/markVisited";
-		var sendNotification = "http://localhost:3000/sendNotification";
-		var findBookingByUserIdAndStatus = "http://localhost:3000/findBookingByUserIdAndStatus";
+		var findBookingByClinicIdURL = "/findBookingByClinicId";
+		var findBookingByUserIdURL = "/findBookingByUserId";
+		var createBookingURL = "/createBooking";
+		var deleteBookingURL = "/deleteBooking";
+		var MarkVisitedURL = "/markVisited";
+		var sendNotification = "/sendNotification";
+		var findBookingByUserIdAndStatus = "/findBookingByUserIdAndStatus";
 
         service.MakeAppointment = MakeAppointment;
 		service.Create = Create;
@@ -58,7 +58,7 @@
 					//createNewBooking
 					Create(data).then(function (newBooking) {
 						if(newBooking !== null && newBooking.success) {
-							var msg = ". Please proceed to to clinic in 5 min(s). Clinic is right to cancel booking for not showing up in time."; 
+							var msg = ". Please proceed to clinic in 5 min(s) advance. Clinic is right to cancel booking for not showing up in time."; 
 						
 							response = handleResponse("Appointment Successful.Your Quno is "+newQno.toString()+". Estimated Time is "+estimatedTime.toString()+" min(s)"+msg , true);
 							

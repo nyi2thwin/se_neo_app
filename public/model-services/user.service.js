@@ -19,20 +19,20 @@
 
         function GetByNric(nric) {
 			var nric = {"nric":nric};
-            return $http.post("http://localhost:3000/findUserByNric",nric).then(handleSuccess, handleError('Error getting user by id'));
+            return $http.post("/findUserByNric",nric).then(handleSuccess, handleError('Error getting user by id'));
         }
 
         function Create(user) {
-            return $http.post("http://localhost:3000/register", user).then(handleSuccess, handleError('Error creating user'));
+            return $http.post("/register", user).then(handleSuccess, handleError('Error creating user'));
         }
 		
 		function Update(user) {
-            return $http.post("http://localhost:3000/updateUser", user).then(handleSuccess, handleError('Error updating user'));
+            return $http.post("/updateUser", user).then(handleSuccess, handleError('Error updating user'));
         }
 		
 		function ResetPasswordByEmail(email) {
 			var id = {"email":email};
-			return $http.post("http://localhost:3000/resetPasswordByEmail",id).then(handleSuccess, handleError('Error Reseting Password'));
+			return $http.post("/resetPasswordByEmail",id).then(handleSuccess, handleError('Error Reseting Password'));
 		}
         // private functions 
 
