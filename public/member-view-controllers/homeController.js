@@ -19,7 +19,7 @@
 		$scope.mdata ={};
 		$scope.markers = []; 
 		$scope.clinicList = {};
-		
+		$scope.estimatedTimeStr = "Estimated waiting time is 5 min(s)."
 				
 		var loggedIn = $rootScope.globals.currentUser;
 		var init = function() {
@@ -76,31 +76,44 @@
 		vm.search = function() {
 			vm.dataLoading = true;
 			Clinic.GetNearByClinic($scope.postalCode)
-				.then(function (response) {
-					if (response !== null && response.success && response.data.clinics) {
+			.then(function (response) {
+				if (response !== null && response.success && response.data.clinics) {
 
-						$scope.clinicList = response.data.clinics;
+					$scope.clinicList = response.data.clinics;
 
-						$scope.markers = []; //clear markers
-						$scope.hideSearchBox = false;
-						$scope.hideSearchResult = false;
-						$scope.hideDetailResult = true;
-						$scope.map.setCenter(new google.maps.LatLng(response.data.lat,response.data.long));
-						$scope.map.setZoom(15);
-						for (var i = 0; i < $scope.clinicList.length; i++){
-							createMarker($scope.clinicList[i]);
-							console.log($scope.clinicList[i]);
-						}
-						
-					} else {
-						FlashService.Error("Error in finding clinic. Please use correct postalcode.");
+					$scope.markers = []; //clear markers
+					$scope.hideSearchBox = false;
+					$scope.hideSearchResult = false;
+					$scope.hideDetailResult = true;
+					$scope.map.setCenter(new google.maps.LatLng(response.data.lat,response.data.long));
+					$scope.map.setZoom(15);
+					for (var i = 0; i < $scope.clinicList.length; i++){
+						createMarker($scope.clinicList[i]);
+						console.log($scope.clinicList[i]);
 					}
-					vm.dataLoading = false;
+					
+				} else {
+					FlashService.Error("Error in finding clinic. Please use correct postalcode.");
+				}
+				vm.dataLoading = false;
 			});
         }
 		
 		vm.viewDetail = function(clinicId) {
 			vm.dataLoading = true;
+			Booking.FindBookingByClinicIdAndStatus(clinicId,"waiting").then(function (booking) {
+				if (booking !== null && booking.success) {
+					var lastIndex = booking.data.length;
+					var lastQno = 0;
+					var estimatedTime = 0;
+					if(lastIndex != 0){
+						lastQno = booking.data[lastIndex-1].queNo;
+						
+					}
+					estimatedTime = (lastQno * 5) + 5;
+					$scope.estimatedTimeStr = "Estimated waiting time is "+ estimatedTime.toString() +" min(s)."
+				}
+			});
 			Clinic.FindClinicById(clinicId)
 				.then(function (response) {
 					if (response !== null && response.success) {
@@ -109,6 +122,7 @@
 						$scope.hideDetailResult = false;
 						$scope.map.setCenter(new google.maps.LatLng(response.data.location[0],response.data.location[1]));
 						$scope.mdata.clinic = response.data;
+						
 					} else {
 						FlashService.Error(response.message);
 					}
