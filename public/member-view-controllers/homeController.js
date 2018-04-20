@@ -5,11 +5,12 @@
         .module('app')
         .controller('homeController', homeController);
 	
-	homeController.$inject = ['$scope','$rootScope','FlashService','Booking','Clinic','Review'];
-    function homeController($scope,$rootScope,FlashService,Booking,Clinic,Review) {
+	homeController.$inject = ['$scope','$rootScope','FlashService','Booking','Clinic','Review','$filter'];
+    function homeController($scope,$rootScope,FlashService,Booking,Clinic,Review,$filter) {
 		var vm = this;
 		vm.dataLoading = false;
 		$scope.disableAppointment = false;
+		$scope.outsideOperatingHr = false;
 		$scope.hideSearchBox = true;
 		$scope.hideSearchResult = true;
 		$scope.hideDetailResult = true;
@@ -23,9 +24,9 @@
 				
 		var loggedIn = $rootScope.globals.currentUser;
 		var init = function() {
-
 			if(!isMobile())
 				$rootScope.sidebarShow();
+			
 			Booking.FindUserCurrentAppointment(loggedIn.id)
 				.then(function (response) {
 						if (response !== null && response.success) {
@@ -101,6 +102,8 @@
 		
 		vm.viewDetail = function(clinicId) {
 			vm.dataLoading = true;
+			
+		
 			Booking.FindBookingByClinicIdAndStatus(clinicId,"waiting").then(function (booking) {
 				if (booking !== null && booking.success) {
 					var lastIndex = booking.data.length;
@@ -122,6 +125,7 @@
 						$scope.hideDetailResult = false;
 						$scope.map.setCenter(new google.maps.LatLng(response.data.location[0],response.data.location[1]));
 						$scope.mdata.clinic = response.data;
+						checkOperatingHr($scope.mdata.clinic.startTime,$scope.mdata.clinic.endTime);
 						
 					} else {
 						FlashService.Error(response.message);
@@ -183,6 +187,17 @@
 					vm.dataLoading = false;
 			});
 			
+		}
+		
+		var checkOperatingHr = function (startTimeStr, endTimeStr) {
+			$scope.outsideOperatingHr = false;
+			var currentHHmm = $filter('date')(new Date(), 'HH:mm');
+			var startTime = $filter('date')(startTimeStr, "HH:mm");
+			var endTime = $filter('date')(endTimeStr, "HH:mm");
+			
+			if (currentHHmm < startTime || currentHHmm > endTime){
+				$scope.outsideOperatingHr = true; //disable Appointment
+			}
 		}
 		
 		/********************* Map Section ***********************************/
